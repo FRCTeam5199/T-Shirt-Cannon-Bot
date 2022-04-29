@@ -2,12 +2,20 @@
 
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import frc.controllers.XboxController;
+import frc.drive.Tankdrive;
+import frc.motors.VictorMotorController;
 
-
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
@@ -15,6 +23,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+@ClientSide
+
 public class Robot extends TimedRobot
 {
     /**
