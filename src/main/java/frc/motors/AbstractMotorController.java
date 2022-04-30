@@ -1,6 +1,5 @@
 package frc.motors;
  
-import frc.misc.PID;
 import frc.misc.UserInterface;
 import frc.motors.followers.AbstractFollowerMotorController;
 import frc.robot.Robot;
