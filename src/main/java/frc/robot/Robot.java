@@ -38,8 +38,15 @@ public class Robot extends TimedRobot {
     
     
     @Override
-    public void teleopPeriodic() {}
-    
+    public void teleopPeriodic() {
+        //TODO check for button down
+        if(true) { 
+            Shooter.fireShot();
+        }
+        else {
+            Shooter.resetShooter();
+        } 
+    }
     
     @Override
     public void disabledInit() {}
