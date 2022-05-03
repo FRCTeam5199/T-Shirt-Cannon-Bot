@@ -6,19 +6,14 @@ import frc.controllers.XboxController;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 
 
 
 public class Tonkerdrive {
+    //defining motors on bot
     private VictorSPX left1;
     private VictorSPX left2;
     private VictorSPX right1;
     private VictorSPX right2;
 
-    
-
-
-    
-    
 }
