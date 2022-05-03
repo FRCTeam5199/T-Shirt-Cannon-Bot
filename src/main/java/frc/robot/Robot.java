@@ -4,7 +4,7 @@
 // the WPILib BSD license file in the root directory of this project.
 package frc.robot;
 
-
+import edu.wpi.first.wpilibj.TimedRobot;
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
