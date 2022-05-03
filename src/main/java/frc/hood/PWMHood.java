@@ -8,10 +8,10 @@ public class PWMHood extends PWMVictorSPX {
     public PWMHood(int channel, double speed) { super(channel); movementSpeed=speed; } // constructor for custom motor speed
     public PWMHood(int channel) { super(channel); } // constructor for default motor speed
 
-    public void move(double units){
+    public void tilt(double units){
         
     }
-    public void moveTo(double position){
+    public void tiltTo(double position){
 
     }
 
