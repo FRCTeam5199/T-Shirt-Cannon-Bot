@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.hood;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;

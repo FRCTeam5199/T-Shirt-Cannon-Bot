@@ -1,7 +1,7 @@
 package frc.misc;
 
 import frc.robot.Robot;
-import frc.selfdiagnostic.ISimpleIssue;
+import frc.diagnostic.ISimpleIssue;
 
 public interface ISubsystem {
     
@@ -16,5 +16,15 @@ public interface ISubsystem {
 
     void initTeleop();
 
-    
+    void initDisabled();
+
+    void initGeneric();
+
+    String getSubsystemName();
+
+    default void addtoMetalList() {
+        Robot.subsystems.add(this);
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package hood;
+package frc.hood;
 
 import edu.wpi.first.wpilibj.motorcontrol.PWMVictorSPX;
 

@@ -33,7 +33,7 @@ public abstract class AbstractMotorController {
 
     public abstract AbstractMotorController setbrake(boolean brake);
 
-    public abstract double getrotates();
+    public abstract double getrotations();
 
     public abstract double getspeed();
 
