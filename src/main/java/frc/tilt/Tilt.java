@@ -23,9 +23,9 @@ public class Tilt {
         setMotorSpeed(nMultiplier); // set new output of motors
     } 
 
-    // constructor for default motor output 0.1
+    // constructor for default motor output 0.5 (50%)
     public Tilt ( int[] deviceNumbers ) {
-        this(deviceNumbers, 0.1);
+        this(deviceNumbers, 0.5);
     } 
     
     
