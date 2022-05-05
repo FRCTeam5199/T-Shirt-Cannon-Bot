@@ -30,24 +30,25 @@ public class Tilt {
     
     
 
-    // the lead motor is just the first item of the motor ArrayList that every other motor is linked to, but I wanted a simple name for it,
-    // instead of "motors.get(0)"
+    // the lead motor is just the first item of the motor ArrayList that every other motor is linked to, 
+    // but I wanted a simple name for it, instead of "motors.get(0)"
     public VictorSPX leadMotor () {
         return motors.get(0);
     }
 
-    // just in case we need to set a different gear in the middle of the performance
-    public void setMotorSpeed ( double nMultiplier ) {
+    // just in case we need to set a different speed in the middle of the performance
+    public void setOutputMultipier ( double nMultiplier ) {
 
-        // set motor speed from multiplier -> returns error codes (0 is the okay and good code that means it works)
-        if( !(motors.get(0).configPeakOutputForward(nMultiplier).equals(ErrorCode.OK) && motors.get(0).configPeakOutputReverse(nMultiplier).equals(ErrorCode.OK)) ){
-            System.out.println("this robot does not vibe with the victor motors");
+        // set motor speed from multiplier will hopefully return the OK ErrorCode
+        // (ErrorCode.OK is good sign and means the speed was successfuly changed)
+        if( leadMotor().configPeakOutputForward(nMultiplier).equals(ErrorCode.OK) && leadMotor().configPeakOutputReverse(nMultiplier).equals(ErrorCode.OK) ){
+            System.out.println("hood motors good to go");  
         } else {
-            System.out.println("hood motors good to go");
+            System.out.println("this robot does not vibe with the victor motors");
         }
     }
    
-    // and 2 more if motors are australian (turning opposite way of what we want to be)
+    // and 2 more if motors are turning opposite way of what we want to be
     public void reverseMotor ( int index ) {
         motors.get(index).setInverted( !motors.get(index).getInverted() ); // toggle state of motor (normal -> reverse, reverse -> normal)
     }
