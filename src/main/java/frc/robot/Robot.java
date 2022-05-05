@@ -5,6 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+//import edu.wpi.first.wpilibj.XboxController;
+import frc.Shooter.Shooter;
+import frc.controllers.XboxController;
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -17,6 +20,14 @@ public class Robot extends TimedRobot {
      * This method is run when the robot is first started up and should be used for any
      * initialization code.
      */
+
+    //Control
+    private boolean driveEnabled = true;
+    private boolean shooterEnabled = true;
+    private boolean hoodEnabled = true;
+
+    XboxController xboxController;
+
     @Override
     public void robotInit() {}
     
@@ -34,17 +45,29 @@ public class Robot extends TimedRobot {
     
     
     @Override
-    public void teleopInit() {}
+    public void teleopInit() {
+        xboxController = new XboxController(0);
+    }
     
     
     @Override
     public void teleopPeriodic() {
-        //TODO check for button down
-        if(true) { 
+        //TODO map buttons
+        
+        //Shooter
+        if(xboxController.getButton(1) && shooterEnabled) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
+        } 
+
+        //Hood
+        if(xboxController.getButton(2) && hoodEnabled) { 
+            
+        }
+        else {
+            
         } 
     }
     
