@@ -38,6 +38,8 @@ public class XboxController {
         return stick1.getRawButton(n);
     }
 
+
+
     public void setLRumble(double n) {
         stick1.setRumble(RumbleType.kLeftRumble, n);
     }
