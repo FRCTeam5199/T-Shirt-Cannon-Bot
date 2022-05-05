@@ -42,7 +42,6 @@ public class Tonkerdrive {
         left2.follow(left1);
         right2.follow(right1);
 
-<<<<<<< HEAD
         dwivue = new DifferentialDrive(left1, right1);
 
         left1.restoreFactoryDefaults();
