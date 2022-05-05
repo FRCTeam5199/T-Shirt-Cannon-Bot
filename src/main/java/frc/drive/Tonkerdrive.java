@@ -17,26 +17,18 @@ import java.util.*;
 
 
 
-public class Tonkerdrive {
+public class Tonkerdrive{
+
     //defining motors on bot
-    static VictorSPX left1 = new VictorSPX(0);
-    static VictorSPX left2 = new VictorSPX(1);
-    static VictorSPX right1 = new VictorSPX(2);
-    static VictorSPX right2 = new VictorSPX(3);
+    left1 = new VictorSPX(0);
+    left2 = new VictorSPX(1);
+    right1 = new VictorSPX(2);
+    right2 = new VictorSPX(3);
 
-    private void add(VictorSPX motors) {
-        motors.set(VictorSPXControlMode.PercentOutput, .05);
-    }
+    left2.follow(left1);
+    right2.follow(right1);
+
+    cooldiff = new DifferentialDrive(left1, right1);
 
 
-    GroupMotorControllers left = new GroupMotorControllers();
-
-    public static void LeftGroup(IMotorController left){
-        ((Tonkerdrive) left).add(left1);
-        ((Tonkerdrive) left).add(left2);
-    }
-    public static void RightGroup(IMotorController right){
-        ((Tonkerdrive) right).add(right1);
-        ((Tonkerdrive) right).add(right2);
-    }
 }
