@@ -4,12 +4,12 @@ import com.ctre.phoenix.*;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
-public class PWMHood{
+public class Tilt{
     VictorSPX motor;
     double multiplier = 0.1;
 
-    public PWMHood(int deviceNumber) { motor = new VictorSPX(deviceNumber); initMotorSpeed(); } // constructor for defualt motor output
-    public PWMHood(int deviceNumber, double nMultiplier) { motor = new VictorSPX(deviceNumber); multiplier = nMultiplier; initMotorSpeed(); } // constructor for custom motor speed 
+    public Tilt(int deviceNumber) { motor = new VictorSPX(deviceNumber); initMotorSpeed(); } // constructor for defualt motor output
+    public Tilt(int deviceNumber, double nMultiplier) { motor = new VictorSPX(deviceNumber); multiplier = nMultiplier; initMotorSpeed(); } // constructor for custom motor speed 
     
     private void initMotorSpeed(){ // set motor speed from multiplier
         if( !(motor.configPeakOutputForward(multiplier).equals(ErrorCode.OK) && motor.configPeakOutputReverse(multiplier).equals(ErrorCode.OK)) ){
