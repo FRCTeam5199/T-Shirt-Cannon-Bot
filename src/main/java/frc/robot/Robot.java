@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
 import frc.Shooter.Shooter;
 import frc.controllers.XboxController;
@@ -27,9 +29,13 @@ public class Robot extends TimedRobot {
     private boolean hoodEnabled = true;
 
     XboxController xboxController;
+    private SimpleWidget simpleWidget;
 
     @Override
-    public void robotInit() {}
+    public void robotInit() {
+        simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
+        xboxController = new XboxController(0);
+    }
     
     
     @Override
@@ -45,24 +51,20 @@ public class Robot extends TimedRobot {
     
     
     @Override
-    public void teleopInit() {
-        xboxController = new XboxController(0);
-    }
+    public void teleopInit() {}
     
     
     @Override
     public void teleopPeriodic() {
-        //TODO map buttons
-        
         //Shooter
-        if(xboxController.getButton(1) && shooterEnabled) { 
+        if(xboxController.getButton(0) && shooterEnabled) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
         } 
 
-        //Hood
+        //TODO Hood
         if(xboxController.getButton(2) && hoodEnabled) { 
             
         }
