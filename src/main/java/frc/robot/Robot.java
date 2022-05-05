@@ -87,13 +87,6 @@ public class Robot extends TimedRobot {
         public static void tele(){
             dwivue.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
     }
-
-    public void teleopInit() {}
-
-    public void teleopInit() {}
-
-    
-    
     @Override
     public void teleopPeriodic() {
         //Shooter

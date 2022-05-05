@@ -49,9 +49,5 @@ public class Tonkerdrive {
         left1.restoreFactoryDefaults();
 
         right1.restoreFactoryDefaults();
-
-        public static void teleopPeriod(){
-            dwivue.tankDrive(stick1.getLXAxis(), stick1.getLYAxis());
-        }
     }
 }
