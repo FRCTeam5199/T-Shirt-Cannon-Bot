@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 
 public class XboxController {
-    private Joystick stick1;
+    public Joystick stick1;
 
     public XboxController(int n) {
         stick1 = new Joystick(n);
