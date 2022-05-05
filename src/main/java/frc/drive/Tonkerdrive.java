@@ -1,5 +1,3 @@
-package frc.drive; 
-
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
@@ -7,6 +5,8 @@ import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import frc.controllers.XboxController;
+
+import frc.robot.Robot;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
@@ -42,6 +42,7 @@ public class Tonkerdrive {
         left2.follow(left1);
         right2.follow(right1);
 
+<<<<<<< HEAD
         dwivue = new DifferentialDrive(left1, right1);
 
         left1.restoreFactoryDefaults();

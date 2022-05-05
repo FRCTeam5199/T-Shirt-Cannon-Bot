@@ -13,4 +13,16 @@ public class ControlPanel {
         return panel.getRawButton(0);
     }
 
+    public boolean button1 () {
+        return panel.getRawButton(1);
+    }
+
+    public boolean button2 () {
+        return panel.getRawButton(2);
+    }
+
+    public boolean button3 () {
+        return panel.getRawButton(3);
+    }
+
 }

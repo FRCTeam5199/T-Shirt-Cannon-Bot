@@ -5,9 +5,32 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
-import frc.Shooter.Shooter;
+import frc.shooter.Shooter;
 import frc.controllers.XboxController;
+import frc.drive.Tonkerdrive;
+
+
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.can.*;
+
+import com.revrobotics.*;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+
+
+import frc.robot.Robot;
+
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.drive.*;
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import java.util.*;
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -15,6 +38,9 @@ import frc.controllers.XboxController;
  * project.
  */
 public class Robot extends TimedRobot {
+    public static XboxController stick1;
+    public static DifferentialDrive dwivue;
+
 
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -27,10 +53,21 @@ public class Robot extends TimedRobot {
     private boolean hoodEnabled = true;
 
     XboxController xboxController;
+    private SimpleWidget simpleWidget;
 
     @Override
-    public void robotInit() {}
+    public void robotInit() {
+<<<<<<< HEAD
+        stick1 = new XboxController(0);
+    }
+
+=======
+>>>>>>> 90dd63a5bbdcd82c8a96c280f4f743ded1e13521
+        simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
+        xboxController = new XboxController(0);
+    }
     
+
     
     @Override
     public void robotPeriodic() {}
@@ -45,24 +82,28 @@ public class Robot extends TimedRobot {
     
     
     @Override
+<<<<<<< HEAD
     public void teleopInit() {
-        xboxController = new XboxController(0);
+        stick1 = new XboxController(0);
+        public static void tele(){
+            dwivue.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
     }
+=======
+    public void teleopInit() {}
+>>>>>>> 90dd63a5bbdcd82c8a96c280f4f743ded1e13521
     
     
     @Override
     public void teleopPeriodic() {
-        //TODO map buttons
-        
         //Shooter
-        if(xboxController.getButton(1) && shooterEnabled) { 
+        if(xboxController.getButton(0) && shooterEnabled) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
         } 
 
-        //Hood
+        //TODO Hood
         if(xboxController.getButton(2) && hoodEnabled) { 
             
         }
