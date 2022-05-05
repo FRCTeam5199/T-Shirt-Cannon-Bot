@@ -6,10 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.*;
 
 import java.util.*;
 
-public class Tilt{
+public class Tilt {
     List<VictorSPX> motors = new ArrayList<VictorSPX>();
     
-    public Tilt(int[] deviceNumbers, double nMultiplier) { // constructor for custom motor output + multiple motors
+    // constructor for custom motor output + multiple motors
+    public Tilt ( int[] deviceNumbers, double nMultiplier ) {
         for (int index = 0; index < deviceNumbers.length; index++) {
             motors.add(new VictorSPX(deviceNumbers[index]));
 
@@ -21,32 +22,46 @@ public class Tilt{
         setMotorSpeed(nMultiplier); // set new output of motors
     } 
 
-    public Tilt(int[] deviceNumbers) { // constructor for default motor output 0.1
+    // constructor for default motor output 0.1
+    public Tilt ( int[] deviceNumbers ) {
         this(deviceNumbers, 0.1);
     } 
     
 
 
-    private void setMotorSpeed(double nMultiplier){ // set motor speed from multiplier -> returns error codes (0 is the okay and good code that means it works)
-        
+    // the lead motor is just the first item of the motor ArrayList, but I wanted a name for it
+    public VictorSPX leadMotor () {
+        return motors.get(0);
+    }
+
+    // just in case we need to set a different gear in the middle of the performance
+    public void setMotorSpeed ( double nMultiplier ) {
+
+        // set motor speed from multiplier -> returns error codes (0 is the okay and good code that means it works)
         if( !(motors.get(0).configPeakOutputForward(nMultiplier).equals(ErrorCode.OK) && motors.get(0).configPeakOutputReverse(nMultiplier).equals(ErrorCode.OK)) ){
             System.out.println("this robot does not vibe with the victor motors");
         } else {
             System.out.println("hood motors good to go");
         }
     }
-
-    public VictorSPX leadMotor(){ // the "master" motor is just the first one on the list
-        return motors.get(0);
+   
+    // and 2 more if motors are australian (turning opposite way of what we want to be)
+    public void reverseMotor ( int index ) {
+        motors.get(index).setInverted( !motors.get(index).getInverted() ); // toggle state of motor (normal -> reverse & reverse -> normal)
+    }
+    public void reverseMotor ( int[] indexes ) {
+        for ( int n = 0; n < indexes.length; n++ ) {
+            reverseMotor( indexes[n] );
+        }
     }
 
+    
 
-
-    public void setToAngle(double angle){
+    // i don't know if victor controllers work like this, but it's worth a shot
+    public void setToAngle ( double angle ){ 
         leadMotor().set(ControlMode.Position, angle * (4096.0 / 360.0)); // convert from angle to the 4096-units-per-rotation
     }
-
-    public double getPosition() {
-        return leadMotor().getSelectedSensorPosition() * (360.0  / 4096.0); // and vice versa here
+    public double getPosition () { //
+        return leadMotor().getSelectedSensorPosition() * (360.0  / 4096.0); // and vice versa here when reading from the controller
     }
 }
