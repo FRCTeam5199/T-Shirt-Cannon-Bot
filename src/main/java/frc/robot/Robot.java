@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
     //Control
     private boolean driveEnabled = true;
     private boolean shooterEnabled = true;
+    private boolean hoodEnabled = true;
 
     XboxController xboxController;
 
@@ -52,11 +53,21 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         //TODO map buttons
+        
+        //Shooter
         if(xboxController.getButton(1) && shooterEnabled) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
+        } 
+
+        //Hood
+        if(xboxController.getButton(2) && hoodEnabled) { 
+            
+        }
+        else {
+            
         } 
     }
     
