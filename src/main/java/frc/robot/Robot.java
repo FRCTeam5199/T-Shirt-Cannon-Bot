@@ -57,12 +57,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-<<<<<<< HEAD
+
         stick1 = new XboxController(0);
     }
 
-=======
->>>>>>> 90dd63a5bbdcd82c8a96c280f4f743ded1e13521
+
         simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
     }
@@ -82,15 +81,17 @@ public class Robot extends TimedRobot {
     
     
     @Override
-<<<<<<< HEAD
+
     public void teleopInit() {
         stick1 = new XboxController(0);
         public static void tele(){
             dwivue.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
     }
-=======
+
     public void teleopInit() {}
->>>>>>> 90dd63a5bbdcd82c8a96c280f4f743ded1e13521
+
+    public void teleopInit() {}
+
     
     
     @Override

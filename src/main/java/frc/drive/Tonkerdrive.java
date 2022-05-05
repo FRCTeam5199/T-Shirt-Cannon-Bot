@@ -1,9 +1,6 @@
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
-import com.revrobotics.*;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import frc.controllers.XboxController;
 
 import frc.robot.Robot;
@@ -13,43 +10,25 @@ import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 import java.util.*;
 
 
 
 
+
 public class Tonkerdrive {
 
+    //defining motors on bot
+    left1 = new VictorSPX(0);
+    left2 = new VictorSPX(1);
+    right1 = new VictorSPX(2);
+    right2 = new VictorSPX(3);
 
-    public static CANSparkMax left1;
-    public static CANSparkMax left2;
-    public static CANSparkMax right1;
-    public static CANSparkMax right2;
-    public static DifferentialDrive dwivue;
-    public static final int left1DeviceID = 1;
-    public static final int left2DeviceID = 2;
-    public static final int right1DeviceID = 3;
-    public static final int right2DeviceID = 4;
+    left2.follow(left1);
+    right2.follow(right1);
 
-    public void driveInit() {
-        left1 = new CANSparkMax(left1DeviceID, MotorType.kBrushed);
-        left2 = new CANSparkMax(left2DeviceID, MotorType.kBrushed);
-        right1 = new CANSparkMax(right1DeviceID, MotorType.kBrushed);
-        right2 = new CANSparkMax(right2DeviceID, MotorType.kBrushed);
+    cooldiff = new DifferentialDrive(left1, right1);
 
-        left2.follow(left1);
-        right2.follow(right1);
 
-        dwivue = new DifferentialDrive(left1, right1);
-
-        left1.restoreFactoryDefaults();
-
-        right1.restoreFactoryDefaults();
-
-        public static void teleopPeriod(){
-            dwivue.tankDrive(stick1.getLXAxis(), stick1.getLYAxis());
-        }
-    }
 }
