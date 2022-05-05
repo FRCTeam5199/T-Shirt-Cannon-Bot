@@ -38,7 +38,7 @@ public class Tilt {
 
     // just in case we need to set a different speed in the middle of the performance
     public void setOutputMultipier ( double nMultiplier ) {
-
+        
         // set motor speed from multiplier will hopefully return the OK ErrorCode
         // (ErrorCode.OK is good sign and means the speed was successfuly changed)
         if( leadMotor().configPeakOutputForward(nMultiplier).equals(ErrorCode.OK) && leadMotor().configPeakOutputReverse(nMultiplier).equals(ErrorCode.OK) ){
@@ -48,7 +48,7 @@ public class Tilt {
         }
     }
    
-    // and 2 more if motors are turning opposite way of what we want to be
+    // and 2 more functions if motors are turning opposite way of what we want them to
     public void reverseMotor ( int index ) {
         motors.get(index).setInverted( !motors.get(index).getInverted() ); // toggle state of motor (normal -> reverse, reverse -> normal)
     }
