@@ -17,7 +17,7 @@ import java.util.*;
 
 
 
-public class Tonkerdrive{
+public class Tonkerdrive {
 
     //defining motors on bot
     left1 = new VictorSPX(0);
