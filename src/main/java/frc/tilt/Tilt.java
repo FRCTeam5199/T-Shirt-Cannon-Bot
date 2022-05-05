@@ -11,7 +11,7 @@ public class Tilt{
     public Tilt(int deviceNumber) { motor = new VictorSPX(deviceNumber); initMotorSpeed(); } // constructor for defualt motor output
     public Tilt(int deviceNumber, double nMultiplier) { motor = new VictorSPX(deviceNumber); multiplier = nMultiplier; initMotorSpeed(); } // constructor for custom motor speed 
     
-    private void initMotorSpeed(){ // set motor speed from multiplier
+    private void initMotorSpeed(){ // set motor speed from multiplier -> returns error codes (0 is the okay and good code that means it works)
         if( !(motor.configPeakOutputForward(multiplier).equals(ErrorCode.OK) && motor.configPeakOutputReverse(multiplier).equals(ErrorCode.OK)) ){
             System.out.println("this robot does not vibe with the victor motors");
         } else {
