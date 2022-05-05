@@ -56,8 +56,6 @@ public class Robot extends TimedRobot {
     
     @Override
     public void teleopPeriodic() {
-        //TODO map buttons
-        
         //Shooter
         if(xboxController.getButton(0) && shooterEnabled) { 
             Shooter.fireShot();
@@ -66,7 +64,7 @@ public class Robot extends TimedRobot {
             Shooter.resetShooter();
         } 
 
-        //Hood
+        //TODO Hood
         if(xboxController.getButton(2) && hoodEnabled) { 
             
         }
