@@ -8,8 +8,29 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
-import frc.Shooter.Shooter;
+import frc.shooter.Shooter;
 import frc.controllers.XboxController;
+import frc.drive.Tonkerdrive;
+
+
+import com.ctre.phoenix.motorcontrol.*;
+import com.ctre.phoenix.motorcontrol.can.*;
+
+import com.revrobotics.*;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+
+
+import frc.robot.Robot;
+
+import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.drive.*;
+import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
+import java.util.*;
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -17,6 +38,9 @@ import frc.controllers.XboxController;
  * project.
  */
 public class Robot extends TimedRobot {
+    public static XboxController stick1;
+    public static DifferentialDrive dwivue;
+
 
     /**
      * This method is run when the robot is first started up and should be used for any
@@ -33,10 +57,16 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+
+        stick1 = new XboxController(0);
+    }
+
+
         simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
     }
     
+
     
     @Override
     public void robotPeriodic() {}
@@ -51,9 +81,12 @@ public class Robot extends TimedRobot {
     
     
     @Override
-    public void teleopInit() {}
-    
-    
+
+    public void teleopInit() {
+        stick1 = new XboxController(0);
+        public static void tele(){
+            dwivue.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
+    }
     @Override
     public void teleopPeriodic() {
         //Shooter
