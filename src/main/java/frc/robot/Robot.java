@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
         stick1 = new XboxController(0);
-        public static void tele(){
+        public static void tele(){ // no voids in voids. bad
             dwivue.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
         }
     }
