@@ -7,7 +7,7 @@ public class Hood{
     Tilt tilt;
     Shooter shooter = new Shooter();
 
-    double[] anglePositions = {30.0, 45.0, 60.0, 90.0};
+    double[] anglePositions = {30.0, 45.0, 60.0}; // change for different angle positions
     int angleIndex;
     
     // constructors for the shooter motors, default percent output, and default set starting position
@@ -24,10 +24,15 @@ public class Hood{
         this(hoodMotorCANIDs, 1, percentOutput); // defauit position is anglePositions[2], or 90 degrees
     }
     public Hood(int[] hoodMotorCANIDs){
-        this(hoodMotorCANIDs, 1, 0.1); //
+        this(hoodMotorCANIDs, 1, 0.1);
     }
 
-    // and for moving between the set positions, we have this function
+
+    // and for moving between the set positions, we have these 2 functions
+    public void moveTo(int space){
+        angleIndex = space;
+        tilt.setToAngle(anglePositions[space]);
+    }
     public void move(int spaces){
         if( (angleIndex + spaces > -1) || (angleIndex + spaces < anglePositions.length) ){ // make sure angle moved to exists, and isn't out of bounds
             angleIndex += spaces;
@@ -36,4 +41,8 @@ public class Hood{
         } else { System.out.println("cannot move anymore, don't break me :("); } // console indication that this crap don't work
     }
 
+    // finally, i just want an easier way to get the current position
+    public double currentAnglePosition(){
+        return anglePositions[angleIndex];
+    }
 }
