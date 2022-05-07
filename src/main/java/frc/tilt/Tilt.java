@@ -20,7 +20,7 @@ public class Tilt {
             }
         }
         
-        setMotorSpeed(nMultiplier); // set new output of motors
+        setOutputMultipier(nMultiplier); // set new output of motors
     } 
 
     // constructor for default motor output 0.5 (50%)

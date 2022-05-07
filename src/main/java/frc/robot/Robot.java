@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
-import frc.shooter.Shooter;
+import frc.Shooter.Shooter;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 
@@ -59,9 +59,8 @@ public class Robot extends TimedRobot {
     public void robotInit() {
 
         stick1 = new XboxController(0);
-    }
-
-
+        
+        // removed this "}" here
         simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
     }
