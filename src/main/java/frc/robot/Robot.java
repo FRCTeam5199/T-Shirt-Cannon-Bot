@@ -85,7 +85,9 @@ public class Robot extends TimedRobot {
         stick1 = new XboxController(0);
         public static void tele(){
             dwivue.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
+        }
     }
+
     @Override
     public void teleopPeriodic() {
         //Shooter
