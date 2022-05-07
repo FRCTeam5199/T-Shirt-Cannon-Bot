@@ -1,6 +1,7 @@
 package frc.tilt;
 
-import frc.Shooter.Shooter;
+import frc.Shooter.*;
+import frc.tilt.*;
 
 public class Hood{
     Tilt tilt;
@@ -20,10 +21,10 @@ public class Hood{
         this(hoodMotorCANIDs, positionIndex, 0.1); // defauit output is 10%
     }
     public Hood(int[] hoodMotorCANIDs, double percentOutput){
-        this(hoodMotorCANIDs, 2, percentOutput); // defauit position is anglePositions[2], or 90 degrees
+        this(hoodMotorCANIDs, 1, percentOutput); // defauit position is anglePositions[2], or 90 degrees
     }
     public Hood(int[] hoodMotorCANIDs){
-        this(hoodMotorCANIDs, 2, 0.1); //
+        this(hoodMotorCANIDs, 1, 0.1); //
     }
 
     // and for moving between the set positions, we have this function
