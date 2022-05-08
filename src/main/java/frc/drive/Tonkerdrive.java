@@ -29,7 +29,7 @@ public class Tonkerdrive {
     public static CANSparkMax left2;
     public static CANSparkMax right1;
     public static CANSparkMax right2;
-    public static DifferentialDrive dwivue;
+    public static DifferentialDrive drive;
     public static final int left1DeviceID = 1;
     public static final int left2DeviceID = 2;
     public static final int right1DeviceID = 3;
@@ -44,7 +44,7 @@ public class Tonkerdrive {
         left2.follow(left1);
         right2.follow(right1);
 
-        dwivue = new DifferentialDrive(left1, right1);
+        drive = new DifferentialDrive(left1, right1);
 
         left1.restoreFactoryDefaults();
 
