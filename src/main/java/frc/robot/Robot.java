@@ -15,8 +15,16 @@ import edu.wpi.first.wpilibj.TimedRobot;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
+<<<<<<< Updated upstream
 public class Robot extends TimedRobot
 {
+=======
+public class Robot extends TimedRobot {
+    public static XboxController stick1;
+    public static DifferentialDrive drive; 
+
+
+>>>>>>> Stashed changes
     /**
      * This method is run when the robot is first started up and should be used for any
      * initialization code.
@@ -38,12 +46,50 @@ public class Robot extends TimedRobot
     
     
     @Override
+<<<<<<< Updated upstream
     public void teleopInit() {}
     
     
     @Override
     public void teleopPeriodic() {}
     
+=======
+
+    public void teleopInit() {
+        stick1 = new XboxController(0);
+        public static void tele(){
+            drive.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
+        }
+    @Override
+    public void teleopPeriodic() {
+
+        //Drive 
+        if (Robot.stick1.getLYAxis() > 0) { 
+            drive.tankDrive(Robot.stick1.getLYAxis() * .5, Robot.stick1.getLYAxis() * .5);
+        }
+
+        if (Robot.stick1.getLYAxis() < 0) {
+            drive.tankDrive(Robot.stick1.getLYAxis() * -.5, Robot.stick1.getLYAxis() * -.5);
+
+        }
+        
+        //Shooter
+        if(xboxController.getButton(0) && shooterEnabled) { 
+            Shooter.fireShot();
+        }
+        else {
+            Shooter.resetShooter();
+        } 
+
+        //TODO Hood
+        if(xboxController.getButton(2) && hoodEnabled) { 
+            
+        }
+        else {
+            
+        } 
+    }
+>>>>>>> Stashed changes
     
     @Override
     public void disabledInit() {}
