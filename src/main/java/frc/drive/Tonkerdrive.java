@@ -49,16 +49,24 @@ public class Tonkerdrive {
         left1.restoreFactoryDefaults();
 
         right1.restoreFactoryDefaults();
-    
-        drive = new DifferentialDrive(left1, right1);
+    }
+    public static void moveForward() {
+        drive.tankDrive(Robot.stick1.getLYAxis() * .5, Robot.stick1.getLYAxis() * .5);
     }
 
-    private void setDefaultCommand(Tonkerdrive tonkerdrive) {
+    public static void moveBackward() {
+        drive.tankDrive(Robot.stick1.getLYAxis() * -.5, Robot.stick1.getLYAxis() * -.5);
     }
 
-    public void DefaultCommand(){
-        setDefaultCommand(new Tonkerdrive());
+    public static void rotateLeft() {
+        drive.tankDrive(Robot.stick1.getLXAxis() * -.5, Robot.stick1.getLXAxis() * .5);
     }
+
+    public static void rotateRight() {
+        drive.tankDrive(Robot.stick1.getLXAxis() * .5, Robot.stick1.getLXAxis() * -.5);
+    }
+
+
 
     public void setMotors(double left, double right){
         left = scaleLeft(left);

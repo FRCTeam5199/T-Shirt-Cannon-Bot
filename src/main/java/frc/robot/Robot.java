@@ -39,7 +39,6 @@ import java.util.*;
  */
 public class Robot extends TimedRobot {
     public static XboxController stick1;
-    public static DifferentialDrive drive;
 
 
     /**
@@ -83,21 +82,28 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
         stick1 = new XboxController(0);
-
-            drive.tankDrive(Robot.stick1.getLXAxis(), Robot.stick1.getLYAxis());
     }
 
     @Override
     public void teleopPeriodic() {
 
         //Drive
-               if (Robot.stick1.getLYAxis() > 0) { 
-            drive.tankDrive(Robot.stick1.getLYAxis() * .5, Robot.stick1.getLYAxis() * .5);
+        if (Robot.stick1.getLYAxis() > 0) { 
+            Tonkerdrive.moveForward();
         }
 
         if (Robot.stick1.getLYAxis() < 0) {
-            drive.tankDrive(Robot.stick1.getLYAxis() * -.5, Robot.stick1.getLYAxis() * -.5);
-        } 
+            Tonkerdrive.moveBackward();
+        }
+
+        if (Robot.stick1.getLXAxis() > 0) {
+            Tonkerdrive.rotateRight();
+        }
+
+        if (Robot.stick1.getLXAxis() < 0) {
+            Tonkerdrive.rotateLeft();
+        }
+
 
         //Shooter
         if(xboxController.getButton(0) && shooterEnabled) { 
