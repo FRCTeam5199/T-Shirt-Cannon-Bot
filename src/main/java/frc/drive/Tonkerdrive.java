@@ -49,5 +49,46 @@ public class Tonkerdrive {
         left1.restoreFactoryDefaults();
 
         right1.restoreFactoryDefaults();
+    
+        drive = new DifferentialDrive(left1, right1);
     }
+
+    private void setDefaultCommand(Tonkerdrive tonkerdrive) {
+    }
+
+    public void DefaultCommand(){
+        setDefaultCommand(new Tonkerdrive());
+    }
+
+    public void setMotors(double left, double right){
+        left = scaleLeft(left);
+        right = scaleRight(right);
+
+        setMotorsRaw(left, right);
+    }
+
+    public void setMotorsRaw(double left, double right) {
+        left = safetyTest(left);
+        right = safetyTest(right);
+
+        left1.set(left);
+        right1.set(right);
+    }
+
+    private double safetyTest(double motorValue) {
+        motorValue = (motorValue < -1) ? -1 : motorValue;
+        motorValue = (motorValue > 1) ? 1 : motorValue;
+
+        return motorValue;
+    }
+
+    private double scaleLeft(double left) {
+        return 1.0 * left;
+    }
+
+    private double scaleRight(double right) {
+        return 1.0 * right;
+    }
+
+
 }
