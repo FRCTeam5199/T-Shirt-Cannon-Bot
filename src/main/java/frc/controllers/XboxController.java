@@ -11,27 +11,27 @@ public class XboxController {
     }
 
     public double getLXAxis() {
-        return stick1.getRawAxis(0);
+        return (stick1.getRawAxis(0) > 0.05 ? stick1.getRawAxis(0) : 0);
     }
 
     public double getLYAxis() {
-        return -stick1.getRawAxis(1);
+        return -(stick1.getRawAxis(1) > 0.05 ? stick1.getRawAxis(1) : 0);
     }
 
     public double getRXAxis() {
-        return stick1.getRawAxis(4);
+        return (stick1.getRawAxis(4) > 0.05 ? stick1.getRawAxis(4) : 0);
     }
 
     public double getRYAxis() {
-        return -stick1.getRawAxis(5);
+        return -(stick1.getRawAxis(5) > 0.05 ? stick1.getRawAxis(5) : 0);
     }
 
     public double getRTrigger() {
-        return stick1.getRawAxis(3);
+        return (stick1.getRawAxis(3) > 0.05 ? stick1.getRawAxis(3) : 0);
     }
 
     public double getLTrigger() {
-        return stick1.getRawAxis(2);
+        return (stick1.getRawAxis(2) > 0.05 ? stick1.getRawAxis(2) : 0);
     }
 
     public boolean getButton(int n) {

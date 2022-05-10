@@ -51,6 +51,7 @@ public class Robot extends TimedRobot {
     private boolean driveEnabled = true;
     private boolean shooterEnabled = true;
     private boolean hoodEnabled = true;
+    private Tonkerdrive drive = new Tonkerdrive();
 
     XboxController xboxController;
     ControlPanel controlPanel;
@@ -64,9 +65,8 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-
         stick1 = new XboxController(0);
-        
+        drive.driveInit();
         // removed this "}" here
         //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
@@ -104,9 +104,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         //Drive
-        
-
-        
+        drive.updateTeleOp();
 
         //Shooter
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
