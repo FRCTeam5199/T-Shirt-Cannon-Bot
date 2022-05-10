@@ -44,25 +44,6 @@ public class Tonkerdrive {
         left2.follow(left1);
         right2.follow(right1);
 
-        left1.restoreFactoryDefaults();
-
-        right1.restoreFactoryDefaults();
-    }
-    
-    public static void moveForward() {
-        drive.tankDrive(Robot.stick1.getLYAxis() * .5, Robot.stick1.getLYAxis() * .5);
-    }
-
-    public static void moveBackward() {
-        drive.tankDrive(Robot.stick1.getLYAxis() * -.5, Robot.stick1.getLYAxis() * -.5);
-    }
-
-    public static void rotateLeft() {
-        drive.tankDrive(Robot.stick1.getLXAxis() * -.5, Robot.stick1.getLXAxis() * .5);
-    }
-
-    public static void rotateRight() {
-        drive.tankDrive(Robot.stick1.getLXAxis() * .5, Robot.stick1.getLXAxis() * -.5);
     }
 
 

@@ -88,22 +88,9 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         //Drive
-        if (Robot.stick1.getLYAxis() > 0) { 
-            Tonkerdrive.moveForward();
-        }
 
-        if (Robot.stick1.getLYAxis() < 0) {
-            Tonkerdrive.moveBackward();
-        }
 
-        if (Robot.stick1.getLXAxis() > 0) {
-            Tonkerdrive.rotateRight();
-        }
-
-        if (Robot.stick1.getLXAxis() < 0) {
-            Tonkerdrive.rotateLeft();
-        }
-
+        
 
         //Shooter
         if(xboxController.getButton(0) && shooterEnabled) { 
