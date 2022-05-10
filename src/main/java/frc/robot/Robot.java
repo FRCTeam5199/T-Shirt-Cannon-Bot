@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
 import frc.Shooter.Shooter;
+import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 
@@ -22,7 +23,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 import frc.robot.Robot;
-
+import frc.tilt.Hood;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -53,6 +54,13 @@ public class Robot extends TimedRobot {
     private boolean hoodEnabled = true;
 
     XboxController xboxController;
+    ControlPanel controlPanel;
+
+    Hood hood;
+    int[] canMotorIds;
+    int positionIndex;
+    double percentOutput;
+
     private SimpleWidget simpleWidget;
 
     @Override
@@ -61,8 +69,15 @@ public class Robot extends TimedRobot {
         stick1 = new XboxController(0);
         
         // removed this "}" here
-        simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
+        //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
+        controlPanel = new ControlPanel(0);
+
+        //TODO set motor IDs, position index, and percent output, the current values are PLACEHOLDERS
+        canMotorIds = new int[]{0, 1, 3};
+        positionIndex = 1;
+        percentOutput = 100;
+        hood = new Hood(canMotorIds, positionIndex, percentOutput);
     }
     
 
@@ -83,6 +98,7 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
         stick1 = new XboxController(0);
+        Shooter.resetShooter();
     }
 
     @Override
@@ -94,20 +110,25 @@ public class Robot extends TimedRobot {
         
 
         //Shooter
-        if(xboxController.getButton(0) && shooterEnabled) { 
+        if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
         } 
 
-        //TODO Hood
-        if(xboxController.getButton(2) && hoodEnabled) { 
-            
+        //TODO Hood 
+        //note: control panel and button values have not been mapped, these might not be the intended buttons
+        //note: The hood.moveTo positions might not be correct
+        if((xboxController.getButton(2) || controlPanel.button1()) && hoodEnabled) { 
+            hood.moveTo(0);
         }
-        else {
-            
-        } 
+        else if ((xboxController.getButton(3) || controlPanel.button2()) && hoodEnabled) {
+            hood.moveTo(1);
+        }
+        else if ((xboxController.getButton(4) || controlPanel.button3()) && hoodEnabled) {
+            hood.moveTo(2);
+        }
     }
     
     @Override
