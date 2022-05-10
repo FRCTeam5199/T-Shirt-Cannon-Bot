@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
 import frc.Shooter.Shooter;
+import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 
@@ -52,6 +53,8 @@ public class Robot extends TimedRobot {
     private boolean hoodEnabled = true;
 
     XboxController xboxController;
+    ControlPanel controlPanel;
+
     private SimpleWidget simpleWidget;
 
     @Override
@@ -60,8 +63,9 @@ public class Robot extends TimedRobot {
         stick1 = new XboxController(0);
         
         // removed this "}" here
-        simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
+        //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
+        controlPanel = new ControlPanel(0);
     }
     
 
@@ -82,6 +86,7 @@ public class Robot extends TimedRobot {
 
     public void teleopInit() {
         stick1 = new XboxController(0);
+        Shooter.resetShooter();
     }
 
     @Override
@@ -93,15 +98,16 @@ public class Robot extends TimedRobot {
         
 
         //Shooter
-        if(xboxController.getButton(0) && shooterEnabled) { 
+        if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
         } 
 
-        //TODO Hood
-        if(xboxController.getButton(2) && hoodEnabled) { 
+        //TODO Hood 
+        //note: control panel button 1 might not be the intended button
+        if((xboxController.getButton(2) || controlPanel.button1()) && hoodEnabled) { 
             
         }
         else {
