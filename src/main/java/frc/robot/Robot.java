@@ -40,6 +40,7 @@ import java.util.*;
  */
 public class Robot extends TimedRobot {
     public static XboxController stick1;
+    public static Tonkerdrive drive = new Tonkerdrive();
 
 
     /**
@@ -51,7 +52,6 @@ public class Robot extends TimedRobot {
     private boolean driveEnabled = true;
     private boolean shooterEnabled = true;
     private boolean hoodEnabled = true;
-    private Tonkerdrive drive = new Tonkerdrive();
 
     XboxController xboxController;
     ControlPanel controlPanel;
@@ -104,7 +104,9 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         //Drive
+
         drive.updateTeleOp();
+
 
         //Shooter
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
