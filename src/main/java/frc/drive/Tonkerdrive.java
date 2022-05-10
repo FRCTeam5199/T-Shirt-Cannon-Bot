@@ -7,10 +7,6 @@ import frc.controllers.XboxController;
 
 import frc.robot.Robot;
 
-
-
-
-
 public class Tonkerdrive {
 
 
@@ -22,6 +18,8 @@ public class Tonkerdrive {
     public static final int left2DeviceID = 2;
     public static final int right1DeviceID = 3;
     public static final int right2DeviceID = 4;
+    private double turnFactor = 0.3;
+    private double voltageMult = 9.2;
     public boolean isInverted = false;
     private XboxController joystick = new XboxController(0);
     public Robot driveable = new Robot();
@@ -45,8 +43,8 @@ public class Tonkerdrive {
     
     public void Teleop() {
 
-        left1.setVoltage((joystick.getLYAxis() + (joystick.getRXAxis() * .3)) * 9.2);
-        right1.setVoltage((joystick.getLYAxis() - (joystick.getRXAxis() * .3)) * 9.2);
+        left1.setVoltage((joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult);
+        right1.setVoltage((joystick.getLYAxis() - (joystick.getRXAxis() * turnFactor)) * voltageMult);
     }
 
 
