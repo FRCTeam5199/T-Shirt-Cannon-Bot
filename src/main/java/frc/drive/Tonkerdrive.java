@@ -8,12 +8,6 @@ import frc.controllers.XboxController;
 import frc.robot.Robot;
 
 
-import edu.wpi.first.wpilibj.drive.*;
-import edu.wpi.first.wpilibj.*;
-
-
-import java.util.*;
-
 
 
 
@@ -30,8 +24,12 @@ public class Tonkerdrive {
     public static final int right2DeviceID = 4;
     public boolean isInverted = false;
     private XboxController joystick = new XboxController(0);
+    public Robot driveable = new Robot();
 
     public void driveInit() {
+
+        Robot.driveEnabled = true;
+
         left1 = new CANSparkMax(left1DeviceID, MotorType.kBrushed);
         left2 = new CANSparkMax(left2DeviceID, MotorType.kBrushed);
         right1 = new CANSparkMax(right1DeviceID, MotorType.kBrushed);

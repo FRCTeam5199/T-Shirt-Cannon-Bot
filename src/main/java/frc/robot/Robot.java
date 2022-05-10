@@ -5,8 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.SimpleWidget;
 //import edu.wpi.first.wpilibj.XboxController;
 import frc.Shooter.Shooter;
 import frc.controllers.ControlPanel;
@@ -14,24 +12,13 @@ import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 
 
-import com.ctre.phoenix.motorcontrol.*;
-import com.ctre.phoenix.motorcontrol.can.*;
-
-import com.revrobotics.*;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 
 
 import frc.robot.Robot;
 import frc.tilt.Hood;
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.drive.*;
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
-import java.util.*;
+
+
 /**
  * The VM is configured to automatically run this class, and to call the methods corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -49,7 +36,7 @@ public class Robot extends TimedRobot {
      */
 
     //Control
-    private boolean driveEnabled = true;
+    public static boolean driveEnabled = true;
     private boolean shooterEnabled = true;
     private boolean hoodEnabled = true;
 
@@ -61,7 +48,6 @@ public class Robot extends TimedRobot {
     int positionIndex;
     double percentOutput;
 
-    private SimpleWidget simpleWidget;
 
     @Override
     public void robotInit() {
