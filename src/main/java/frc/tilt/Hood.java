@@ -1,7 +1,6 @@
 package frc.tilt;
 
 import frc.Shooter.*;
-import frc.tilt.*;
 
 public class Hood{
     public Tilt tilt;

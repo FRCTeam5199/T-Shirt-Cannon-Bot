@@ -89,8 +89,8 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         //Drive
-        //note: did we do a wrong name? function needs to be made
-        drive.updateTeleOp();
+
+        drive.Teleop();
 
 
         //Shooter
