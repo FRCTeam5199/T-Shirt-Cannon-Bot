@@ -39,6 +39,7 @@ import java.util.*;
  */
 public class Robot extends TimedRobot {
     public static XboxController stick1;
+    public static Tonkerdrive drive = new Tonkerdrive();
 
 
     /**
@@ -88,7 +89,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         //Drive
-        
+        drive.Teleop();
 
         
 

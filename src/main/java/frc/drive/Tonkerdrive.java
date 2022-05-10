@@ -1,6 +1,5 @@
 package frc.drive;
 
-
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -11,7 +10,7 @@ import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.drive.*;
 import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+
 
 import java.util.*;
 
@@ -25,11 +24,12 @@ public class Tonkerdrive {
     public static CANSparkMax left2;
     public static CANSparkMax right1;
     public static CANSparkMax right2;
-    public static DifferentialDrive drive;
     public static final int left1DeviceID = 1;
     public static final int left2DeviceID = 2;
     public static final int right1DeviceID = 3;
     public static final int right2DeviceID = 4;
+    public boolean isInverted = false;
+    private XboxController joystick = new XboxController(0);
 
     public void driveInit() {
         left1 = new CANSparkMax(left1DeviceID, MotorType.kBrushed);
@@ -40,10 +40,17 @@ public class Tonkerdrive {
         left2.follow(left1);
         right2.follow(right1);
 
-        left1.setInverted(true);
-        right1.setInverted(false);
+        left1.setInverted(!isInverted);
+        right1.setInverted(isInverted);
 
     }
+    
+    public void Teleop() {
+
+        left1.setVoltage((joystick.getLYAxis() + (joystick.getRXAxis() * .3)) * 9.2);
+        right1.setVoltage((joystick.getLYAxis() - (joystick.getRXAxis() * .3)) * 9.2);
+    }
+
 
 
   
