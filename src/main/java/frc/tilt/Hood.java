@@ -4,8 +4,8 @@ import frc.Shooter.*;
 import frc.tilt.*;
 
 public class Hood{
-    Tilt tilt;
-    Shooter shooter = new Shooter();
+    public Tilt tilt;
+    public Shooter shooter = new Shooter();
 
     double[] anglePositions = {30.0, 45.0, 60.0}; // change for different angle positions
     int angleIndex;

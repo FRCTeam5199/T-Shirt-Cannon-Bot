@@ -80,26 +80,25 @@ public class Robot extends TimedRobot {
     
     
     @Override
-
     public void teleopInit() {
         stick1 = new XboxController(0);
-        Shooter.resetShooter();
+        hood.shooter.resetShooter();
     }
 
     @Override
     public void teleopPeriodic() {
 
         //Drive
-
+        //note: did we do a wrong name? function needs to be made
         drive.updateTeleOp();
 
 
         //Shooter
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
-            Shooter.fireShot();
+            hood.shooter.fireShot();
         }
         else {
-            Shooter.resetShooter();
+            hood.shooter.resetShooter();
         } 
 
         //TODO Hood 
