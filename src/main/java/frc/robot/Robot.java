@@ -23,7 +23,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 
 import frc.robot.Robot;
-
+import frc.tilt.Hood;
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -55,6 +55,11 @@ public class Robot extends TimedRobot {
     XboxController xboxController;
     ControlPanel controlPanel;
 
+    Hood hood;
+    int[] canMotorIds;
+    int positionIndex;
+    double percentOutput;
+
     private SimpleWidget simpleWidget;
 
     @Override
@@ -66,6 +71,12 @@ public class Robot extends TimedRobot {
         //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
         controlPanel = new ControlPanel(0);
+
+        //TODO set motor IDs, position index, and percent output, the current values are PLACEHOLDERS
+        canMotorIds = new int[]{0, 1, 3};
+        positionIndex = 1;
+        percentOutput = 100;
+        hood = new Hood(canMotorIds, positionIndex, percentOutput);
     }
     
 
@@ -106,13 +117,17 @@ public class Robot extends TimedRobot {
         } 
 
         //TODO Hood 
-        //note: control panel button 1 might not be the intended button
+        //note: control panel and button values have not been mapped, these might not be the intended buttons
+        //note: The hood.moveTo positions might not be correct
         if((xboxController.getButton(2) || controlPanel.button1()) && hoodEnabled) { 
-            
+            hood.moveTo(0);
         }
-        else {
-            
-        } 
+        else if ((xboxController.getButton(3) || controlPanel.button2()) && hoodEnabled) {
+            hood.moveTo(1);
+        }
+        else if ((xboxController.getButton(4) || controlPanel.button3()) && hoodEnabled) {
+            hood.moveTo(2);
+        }
     }
     
     @Override
