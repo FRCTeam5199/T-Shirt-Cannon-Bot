@@ -82,7 +82,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         stick1 = new XboxController(0);
-        hood.shooter.resetShooter();
+        Shooter.resetShooter();
     }
 
     @Override
@@ -95,10 +95,10 @@ public class Robot extends TimedRobot {
 
         //Shooter
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
-            hood.shooter.fireShot();
+            Shooter.fireShot();
         }
         else {
-            hood.shooter.resetShooter();
+            Shooter.resetShooter();
         } 
 
         //TODO Hood 
