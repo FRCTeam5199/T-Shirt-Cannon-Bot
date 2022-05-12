@@ -68,7 +68,7 @@ public class Robot extends TimedRobot {
         canMotorIds = new int[]{0, 1, 3};
         positionIndex = 1;
         percentOutput = 100;
-        hood = new Hood(canMotorIds, positionIndex, percentOutput);
+        hood = new Hood(canMotorIds, percentOutput, positionIndex);
 
         //TODO ensure with electrical team that the pressure sensor is plugged into analog port 0 on the rio
         pressureSensor = new AnalogInput(0);
