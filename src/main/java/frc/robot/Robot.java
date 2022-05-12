@@ -10,6 +10,7 @@ import frc.Shooter.Shooter;
 import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
+import edu.wpi.first.wpilibj.*;
 
 
 
@@ -40,14 +41,19 @@ public class Robot extends TimedRobot {
     private boolean shooterEnabled = true;
     private boolean hoodEnabled = true;
 
+    //Inputs
     XboxController xboxController;
     ControlPanel controlPanel;
 
+    //hood
     Hood hood;
     int[] canMotorIds;
     int positionIndex;
     double percentOutput;
 
+    //Pressure sensor
+    AnalogInput pressureSensor;
+    double chargePSI;
 
     @Override
     public void robotInit() {
@@ -62,7 +68,10 @@ public class Robot extends TimedRobot {
         canMotorIds = new int[]{0, 1, 3};
         positionIndex = 1;
         percentOutput = 100;
-        hood = new Hood(canMotorIds, percentOutput, positionIndex);
+        hood = new Hood(canMotorIds, positionIndex, percentOutput);
+
+        //TODO ensure with electrical team that the pressure sensor is plugged into analog port 0 on the rio
+        pressureSensor = new AnalogInput(0);
     }
     
 
@@ -94,12 +103,23 @@ public class Robot extends TimedRobot {
 
 
         //Shooter
-        if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled) { 
+        //getVoltage returns a voltage between 0 and 5v
+        //The REV website states that with this model of sensor 5v = 200 psi
+        //TODO Currently firing at 110 PSI, check with shooter group that this is what they want
+        chargePSI = pressureSensor.getVoltage() * 40;
+        if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) { 
+            Shooter.closeReserve();
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
-        } 
+            if(chargePSI < 110) {
+                Shooter.openReserve();
+            }
+            else {
+                Shooter.closeReserve();
+            }
+        }      
 
         //TODO Hood 
         //note: control panel and button values have not been mapped, these might not be the intended buttons
