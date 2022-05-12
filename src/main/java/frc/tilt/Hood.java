@@ -10,20 +10,20 @@ public class Hood{
     int angleIndex;
     
     // constructors for the shooter motors, default percent output, and default set starting position
-    public Hood(int[] hoodMotorCANIDs, int positionIndex, double percentOutput){
+    public Hood(int[] hoodMotorCANIDs, double percentOutput, int positionIndex){
         tilt = new Tilt(hoodMotorCANIDs, percentOutput);
         tilt.setToAngle(anglePositions[positionIndex]);
 
         angleIndex = positionIndex;
     }
     public Hood(int[] hoodMotorCANIDs, int positionIndex){
-        this(hoodMotorCANIDs, positionIndex, 0.1); // defauit output is 10%
+        this(hoodMotorCANIDs, 0.1, positionIndex); // defauit output is 10%
     }
     public Hood(int[] hoodMotorCANIDs, double percentOutput){
-        this(hoodMotorCANIDs, 1, percentOutput); // defauit position is anglePositions[2], or 90 degrees
+        this(hoodMotorCANIDs,percentOutput, 1); // defauit position is anglePositions[2], or 90 degrees
     }
     public Hood(int[] hoodMotorCANIDs){
-        this(hoodMotorCANIDs, 1, 0.1);
+        this(hoodMotorCANIDs, 0.1, 1);
     }
 
 
