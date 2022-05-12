@@ -108,6 +108,7 @@ public class Robot extends TimedRobot {
         //TODO Currently firing at 110 PSI, check with shooter group that this is what they want
         chargePSI = pressureSensor.getVoltage() * 40;
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) { 
+            Shooter.closeReserve();
             Shooter.fireShot();
         }
         else {
