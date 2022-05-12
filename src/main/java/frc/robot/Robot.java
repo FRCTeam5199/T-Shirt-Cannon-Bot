@@ -107,19 +107,18 @@ public class Robot extends TimedRobot {
         //The REV website states that with this model of sensor 5v = 200 psi
         //TODO Currently firing at 110 PSI, check with shooter group that this is what they want
         chargePSI = pressureSensor.getVoltage() * 40;
-        if(chargePSI < 110) {
-            Shooter.openReserve();
-        }
-        else {
-            Shooter.closeReserve();
-        }
-        
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) { 
             Shooter.fireShot();
         }
         else {
             Shooter.resetShooter();
-        } 
+            if(chargePSI < 110) {
+                Shooter.openReserve();
+            }
+            else {
+                Shooter.closeReserve();
+            }
+        }      
 
         //TODO Hood 
         //note: control panel and button values have not been mapped, these might not be the intended buttons
