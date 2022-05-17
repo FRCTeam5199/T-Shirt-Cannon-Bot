@@ -7,4 +7,10 @@ public class LEDManager {
     AddressableLED LEDRGB  = new AddressableLED(1);
     AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(500);
 
+    public void Init() {
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+
+    }
+
 }
