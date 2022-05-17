@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.*;
 public class TiltHood {
     // hood/tilt motor for angle
     VictorSPX tiltMotor;
+    final double[] anglePositions = {30.0, 45.0, 60.0}; // change for different angle positions
+    int angleIndex = 1;
     
     // solenoids for shooting t-shirts
     public static Solenoid shooterSolenoid;
@@ -19,6 +21,7 @@ public class TiltHood {
     public TiltHood(int tiltMotorID, int shooterSolenoidID, int reserveSolenoidID){
         // initialize tilt motor & shooters; link them to device IDs
         tiltMotor = new VictorSPX(tiltMotorID);
+        this.setToAngle(anglePositions[angleIndex]);
 
         shooterSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, shooterSolenoidID);
         reserveSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, reserveSolenoidID);
@@ -43,6 +46,20 @@ public class TiltHood {
                                                                            // controller
     }
 
+    // and for moving between the set anglePositions, we have these 2 functions
+    public void defaultSetTo(int space){
+        angleIndex = space;
+        this.setToAngle(anglePositions[space]);
+    }
+
+    public void defaultMove(int spaces){
+        if( (angleIndex + spaces > -1) && (angleIndex + spaces < anglePositions.length) ){ // make sure angle moved to exists, and isn't out of bounds
+            angleIndex += spaces;
+            this.setToAngle(anglePositions[angleIndex]);
+
+        } else { System.out.println("cannot move anymore, don't break me :("); } // console indication that this crap don't work
+    }
+    
     // functions from previous shooter class
     public static void fireShot() {
         reserveSolenoid.set(false);
