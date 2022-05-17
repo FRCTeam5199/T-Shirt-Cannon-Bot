@@ -30,7 +30,9 @@ import frc.tilt.Hood;
 public class Robot extends TimedRobot {
     public static XboxController stick1;
     public static Tonkerdrive drive = new Tonkerdrive();
-    public static LEDManager LED = new LEDManager();
+    public static LEDManager Led = new LEDManager();
+
+
 
 
     /**
@@ -61,7 +63,7 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         stick1 = new XboxController(0);
         drive.driveInit();
-        LEDManager.Init();
+        Led.Init();
         // removed this "}" here
         //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
@@ -102,7 +104,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         //LED's
         if (controlPanel.button4()){
-            LED.DOLPHIN();
+            Led.DOLPHIN();
         }
         //Drive
         drive.Teleop();
