@@ -104,8 +104,9 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         //LED's
         if (controlPanel.button4()){
-            Led.DOLPHIN();
+            Led.capoLEDMode();
         }
+        
         //Drive
         drive.Teleop();
 
