@@ -11,6 +11,7 @@ import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 import edu.wpi.first.wpilibj.*;
+import frc.LED.LEDManager;
 
 
 
@@ -29,6 +30,9 @@ import frc.tilt.Hood;
 public class Robot extends TimedRobot {
     public static XboxController stick1;
     public static Tonkerdrive drive = new Tonkerdrive();
+    public static LEDManager Led = new LEDManager();
+
+
 
 
     /**
@@ -59,11 +63,13 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         stick1 = new XboxController(0);
         drive.driveInit();
+        Led.Init();
         // removed this "}" here
         //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
         controlPanel = new ControlPanel(0);
 
+        LEDManager.test();
         //TODO set motor IDs, position index, and percent output, the current values are PLACEHOLDERS
         canMotorIds = new int[]{0, 1, 3};
         positionIndex = 1;
@@ -96,9 +102,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
-
+        //LED's
+        if (controlPanel.button4()){
+            Led.DOLPHIN();
+        }
         //Drive
-
         drive.Teleop();
 
 

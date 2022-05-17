@@ -25,4 +25,7 @@ public class ControlPanel {
         return panel.getRawButton(3);
     }
 
+    //added by johnathon
+    public boolean button4 () {return panel.getRawButton(4);}
+
 }
