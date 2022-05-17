@@ -47,12 +47,12 @@ public class TiltHood {
     }
 
     // and for moving between the set anglePositions, we have these 2 functions
-    public void defaultSetTo(int space){
+    public void setToDefault(int space){
         angleIndex = space;
         this.setToAngle(anglePositions[space]);
     }
 
-    public void defaultMove(int spaces){
+    public void moveDefault(int spaces){
         if( (angleIndex + spaces > -1) && (angleIndex + spaces < anglePositions.length) ){ // make sure angle moved to exists, and isn't out of bounds
             angleIndex += spaces;
             this.setToAngle(anglePositions[angleIndex]);
@@ -61,21 +61,21 @@ public class TiltHood {
     }
     
     // functions from previous shooter class
-    public static void fireShot() {
+    public void fireShot() {
         reserveSolenoid.set(false);
         shooterSolenoid.set(true);
     } 
 
-    public static void resetShooter() {
+    public void resetShooter() {
         shooterSolenoid.set(false);
     }
 
-    public static void openReserve() {
+    public void openReserve() {
         shooterSolenoid.set(false);
         reserveSolenoid.set(true);
     }
 
-    public static void closeReserve() {
+    public void closeReserve() {
         reserveSolenoid.set(false);
     }
 }
