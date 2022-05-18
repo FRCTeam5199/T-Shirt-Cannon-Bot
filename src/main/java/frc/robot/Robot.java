@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
     ControlPanel controlPanel;
 
     //hood
-    //TODO set motor IDs, position index, and percent output, the current values are PLACEHOLDERS
+    //TODO set motor IDs; the current values are PLACEHOLDERS
     TiltHood hood;
     static final int tiltMotorID = 0;
     static final int shooterSolenoidID = 1;
