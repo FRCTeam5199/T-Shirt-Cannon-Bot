@@ -48,6 +48,9 @@ public class Robot extends TimedRobot {
     static final int shooterSolenoidID = 1;
     static final int reserveSolenoidID = 2;
 
+    // LED Manager
+    LEDManager ledManager = new LEDManager();
+
     //Pressure sensor
     AnalogInput pressureSensor;
     double chargePSI;
@@ -63,7 +66,7 @@ public class Robot extends TimedRobot {
  
         hood = new TiltHood(tiltMotorID, shooterSolenoidID, reserveSolenoidID);
 
-        LEDManager.test();
+        ledManager.test();
 
         //TODO ensure with electrical team that the pressure sensor is plugged into analog port 0 on the rio
         pressureSensor = new AnalogInput(0);
@@ -93,7 +96,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
 
         if (controlPanel.button4()){
-            LEDManager.capoLEDMode();
+            ledManager.capoLEDMode();
         }
 
         //Drive
