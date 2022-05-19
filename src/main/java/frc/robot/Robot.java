@@ -4,20 +4,15 @@
 // the WPILib BSD license file in the root directory of this project.
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.*;
+
 //import edu.wpi.first.wpilibj.XboxController;
-import frc.Shooter.Shooter;
 import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
+
 import frc.drive.Tonkerdrive;
-import edu.wpi.first.wpilibj.*;
+import frc.hood.TiltHood;
 import frc.LED.LEDManager;
-
-
-
-
-import frc.robot.Robot;
-import frc.tilt.Hood;
 
 
 
@@ -30,9 +25,6 @@ import frc.tilt.Hood;
 public class Robot extends TimedRobot {
     public static XboxController stick1;
     public static Tonkerdrive drive = new Tonkerdrive();
-    public static LEDManager Led = new LEDManager();
-
-
 
 
     /**
@@ -50,10 +42,14 @@ public class Robot extends TimedRobot {
     ControlPanel controlPanel;
 
     //hood
-    Hood hood;
-    int[] canMotorIds;
-    int positionIndex;
-    double percentOutput;
+    //TODO set motor IDs; the current values are PLACEHOLDERS
+    TiltHood hood;
+    static final int tiltMotorID = 0;
+    static final int shooterSolenoidID = 1;
+    static final int reserveSolenoidID = 2;
+
+    // LED Manager
+    LEDManager ledManager = new LEDManager();
 
     //Pressure sensor
     AnalogInput pressureSensor;
@@ -63,18 +59,14 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         stick1 = new XboxController(0);
         drive.driveInit();
-        Led.Init();
         // removed this "}" here
         //simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         xboxController = new XboxController(0);
         controlPanel = new ControlPanel(0);
+ 
+        hood = new TiltHood(tiltMotorID, shooterSolenoidID, reserveSolenoidID);
 
-        LEDManager.test();
-        //TODO set motor IDs, position index, and percent output, the current values are PLACEHOLDERS
-        canMotorIds = new int[]{0, 1, 3};
-        positionIndex = 1;
-        percentOutput = 100;
-        hood = new Hood(canMotorIds, percentOutput, positionIndex);
+        ledManager.test();
 
         //TODO ensure with electrical team that the pressure sensor is plugged into analog port 0 on the rio
         pressureSensor = new AnalogInput(0);
@@ -97,16 +89,16 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         stick1 = new XboxController(0);
-        Shooter.resetShooter();
+        hood.resetShooter();
     }
 
     @Override
     public void teleopPeriodic() {
-        //LED's
+
         if (controlPanel.button4()){
-            Led.capoLEDMode();
+            ledManager.capoLEDMode();
         }
-        
+
         //Drive
         drive.Teleop();
 
@@ -117,16 +109,16 @@ public class Robot extends TimedRobot {
         //TODO Currently firing at 110 PSI, check with shooter group that this is what they want
         chargePSI = pressureSensor.getVoltage() * 40;
         if((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) { 
-            Shooter.closeReserve();
-            Shooter.fireShot();
+            hood.closeReserve();
+            hood.fireShot();
         }
         else {
-            Shooter.resetShooter();
+            hood.resetShooter();
             if(chargePSI < 110) {
-                Shooter.openReserve();
+                hood.openReserve();
             }
             else {
-                Shooter.closeReserve();
+                hood.closeReserve();
             }
         }      
 
@@ -134,13 +126,13 @@ public class Robot extends TimedRobot {
         //note: control panel and button values have not been mapped, these might not be the intended buttons
         //note: The hood.moveTo positions might not be correct
         if((xboxController.getButton(2) || controlPanel.button1()) && hoodEnabled) { 
-            hood.moveTo(0);
+            hood.setToDefault(0);
         }
         else if ((xboxController.getButton(3) || controlPanel.button2()) && hoodEnabled) {
-            hood.moveTo(1);
+            hood.setToDefault(1);
         }
         else if ((xboxController.getButton(4) || controlPanel.button3()) && hoodEnabled) {
-            hood.moveTo(2);
+            hood.setToDefault(2);
         }
     }
     
