@@ -29,6 +29,8 @@ public class ControlPanel {
     public boolean button4 () {return panel.getRawButton(4);}
 
      //added by Ethan
-     //TODO map this to the control panel
+     //TODO map both of these to the control panel
      public boolean safetySwitch () {return panel.getRawButton(5);}
+
+     public boolean killSwitch () {return panel.getRawButton(6);}
 }

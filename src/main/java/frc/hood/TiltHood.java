@@ -10,7 +10,7 @@ public class TiltHood {
     // hood/tilt motor for angle
     VictorSPX tiltMotor;
     final double[] anglePositions = {30.0, 45.0, 60.0}; // change for different angle positions
-    int angleIndex = 1;
+    int angleIndex = 2; //default to 60 degrees
     
     // solenoids for shooting t-shirts
     public static Solenoid shooterSolenoid;

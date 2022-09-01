@@ -93,12 +93,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
-
         if (controlPanel.button4()) {
             ledManager.capoLEDMode();
         }
 
-        if (controlPanel.safetySwitch()) {
+        if (controlPanel.killSwitch()) {
             // Drive
             drive.Teleop();
 
@@ -107,16 +106,18 @@ public class Robot extends TimedRobot {
             // The REV website states that with this model of sensor 5v = 200 psi
             // TODO Currently firing at 110 PSI, check with shooter group that this is what
             // they want
-            chargePSI = pressureSensor.getVoltage() * 40;
-            if ((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) {
-                hood.closeReserve();
-                hood.fireShot();
-            } else {
-                hood.resetShooter();
-                if (chargePSI < 110) {
-                    hood.openReserve();
-                } else {
+            if (controlPanel.safetySwitch()) {
+                chargePSI = pressureSensor.getVoltage() * 40;
+                if ((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) {
                     hood.closeReserve();
+                    hood.fireShot();
+                } else {
+                    hood.resetShooter();
+                    if (chargePSI < 110) {
+                        hood.openReserve();
+                    } else {
+                        hood.closeReserve();
+                    }
                 }
             }
 
