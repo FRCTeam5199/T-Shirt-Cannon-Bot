@@ -55,8 +55,8 @@ public class Robot extends TimedRobot {
     // TODO set motor IDs; the current values are PLACEHOLDERS
     TiltHood hood;
     static final int tiltMotorID = 0;
-    static final int shooterSolenoidID = 1;
-    static final int reserveSolenoidID = 2;
+    static final int shooterSolenoidID = 5;
+    static final int reserveSolenoidID = 6;
 
     // LED Manager
     LEDManager ledManager = new LEDManager();
@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
             // they want
             if (true/*controlPanel.safetySwitch()TODO*/) {
                 chargePSI = pressureSensor.getVoltage() * 40;
-                if ((xboxController.getButton(0) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) {
+                if ((xboxController.getButton(1) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) {
                     hood.closeReserve();
                     hood.fireShot();
                 } else {
