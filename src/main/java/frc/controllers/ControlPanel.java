@@ -10,7 +10,8 @@ public class ControlPanel {
     }
 
     public boolean shoot(){
-        return panel.getRawButton(0);
+        //TODO was 0
+        return panel.getRawButton(5);
     }
 
     public boolean button1 () {
