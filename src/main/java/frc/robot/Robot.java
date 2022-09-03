@@ -26,11 +26,21 @@ public class Robot extends TimedRobot {
     public static XboxController stick1;
     public static Tonkerdrive drive = new Tonkerdrive();
 
+
+
     /**
      * This method is run when the robot is first started up and should be used for
      * any
      * initialization code.
      */
+
+
+    public class safety implements Runnable {
+        public void run(){
+            ledManager.safetymode();
+        }
+
+    }
 
     // Control
     public static boolean driveEnabled = true;
