@@ -118,12 +118,12 @@ public class Robot extends TimedRobot {
             // they want
             if (true/*controlPanel.safetySwitch()TODO*/) {
                 chargePSI = pressureSensor.getVoltage() * 40;
-                if ((xboxController.getButton(1) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 110) {
+                if ((xboxController.getButton(1) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 60) {
                     hood.closeReserve();
                     hood.fireShot();
                 } else {
                     hood.resetShooter();
-                    if (chargePSI < 110) {
+                    if (chargePSI < 60) {
                         hood.openReserve();
                     } else {
                         hood.closeReserve();
