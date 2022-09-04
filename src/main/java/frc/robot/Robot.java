@@ -135,11 +135,11 @@ public class Robot extends TimedRobot {
             // note: control panel and button values have not been mapped, these might not
             // be the intended buttons
             // note: The hood.moveTo positions might not be correct
-            if ((xboxController.getButton(2) || controlPanel.button1()) && hoodEnabled) {
+            if ((xboxController.getButton(1) || controlPanel.button1()) && hoodEnabled) {
                 hood.setToDefault(0);
-            } else if ((xboxController.getButton(3) || controlPanel.button2()) && hoodEnabled) {
+            } else if ((xboxController.getButton(2) || controlPanel.button2()) && hoodEnabled) {
                 hood.setToDefault(1);
-            } else if ((xboxController.getButton(4) || controlPanel.button3()) && hoodEnabled) {
+            } else if ((xboxController.getButton(3) || controlPanel.button3()) && hoodEnabled) {
                 hood.setToDefault(2);
             }
         }
