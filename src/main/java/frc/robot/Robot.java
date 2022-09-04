@@ -35,11 +35,28 @@ public class Robot extends TimedRobot {
      */
 
 
-    public class safety implements Runnable {
-        public void run(){
-            ledManager.safetymode();
-        }
+    public class WarningLed implements Runnable{
+        private Thread t;
+        private String Led;
 
+        WarningLed(String warn){
+            Led = warn;
+        }
+        public void run(){
+            try{
+                while(controlPanel.safetySwitch()) {
+                ledManager.safetymode();
+                }
+            }catch(IllegalAccessError error){
+                System.out.println("LED's Failed!");
+            }
+        }
+        public void start(){
+            if(t == null){
+                t = new Thread(this, Led);
+                t.start();
+            }
+        }
     }
 
     // Control
@@ -103,9 +120,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
-        if (controlPanel.button4()) {
-            ledManager.capoLEDMode();
-        }
+        WarningLed warning = new WarningLed("orange");
+        
+        ledManager.capoLEDMode();
 
         if (/*controlPanel.killSwitch()TODO*/ true) {
             // Drive
@@ -117,8 +134,9 @@ public class Robot extends TimedRobot {
             // TODO Currently firing at 110 PSI, check with shooter group that this is what
             // they want
             if (true/*controlPanel.safetySwitch()TODO*/) {
+                warning.start();
                 chargePSI = pressureSensor.getVoltage() * 40;
-                if ((xboxController.getButton(1) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 60) {
+                if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 60) {
                     hood.closeReserve();
                     hood.fireShot();
                 } else {
