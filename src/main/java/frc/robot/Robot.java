@@ -121,7 +121,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         WarningLed warning = new WarningLed("orange");
-        
+
         ledManager.capoLEDMode();
 
         if (/*controlPanel.killSwitch()TODO*/ true) {
