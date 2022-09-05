@@ -4,9 +4,12 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
 import frc.controllers.ControlPanel;
+import frc.controllers.XboxController;
 
 
 public class LEDManager {
+    XboxController xboxController = new XboxController(0);
+    ControlPanel panelofcontrol = new ControlPanel(1);
     ControlPanel controlPanel;
     static AddressableLED LEDRGB = new AddressableLED(1);
     static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(500);
@@ -48,10 +51,15 @@ public class LEDManager {
         }
     }
 
-    public void safetymode() {
+    public void safetymode() throws InterruptedException {
             int safetylight = 0;
             while(controlPanel.safetySwitch()) {
                 LEDBUFFER.setRGB(safetylight, 255, 164, 0);
+                LEDBUFFER.setRGB(safetylight, 0, 0, 0);
+                if(xboxController.getButton(4) || panelofcontrol.shoot()){
+                    LEDBUFFER.setRGB(safetylight, 255, 164, 0);
+                    wait(3000);
+                }
             }
     }
 

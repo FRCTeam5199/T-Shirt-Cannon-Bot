@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
                 while(controlPanel.safetySwitch()) {
                 ledManager.safetymode();
                 }
-            }catch(IllegalAccessError error){
+            }catch(IllegalAccessError | InterruptedException error){
                 System.out.println("LED's Failed!");
             }
         }
