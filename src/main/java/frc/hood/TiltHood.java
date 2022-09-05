@@ -16,6 +16,9 @@ public class TiltHood {
     public static Solenoid shooterSolenoid;
     public static Solenoid reserveSolenoid;
 
+    //compressor
+    public static Compressor compressor;
+
     // constructor for the solenoids & tilt motor, with provided IDs
     // TODO Find the device IDs (not so important at the moment)
     public TiltHood(int tiltMotorID, int shooterSolenoidID, int reserveSolenoidID){

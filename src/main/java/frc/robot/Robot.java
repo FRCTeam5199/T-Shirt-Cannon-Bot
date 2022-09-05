@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import frc.LED.LEDManager;
 //import edu.wpi.first.wpilibj.XboxController;
@@ -92,6 +93,14 @@ public class Robot extends TimedRobot {
         controlPanel = new ControlPanel(0);
 
         hood = new TiltHood(tiltMotorID, shooterSolenoidID, reserveSolenoidID);
+
+        //Enables compressor if the shooter is also
+        if(shooterEnabled) {
+            TiltHood.compressor.enableDigital();
+        }
+        else {
+            TiltHood.compressor.disable();
+        }
 
         ledManager.test();
 
