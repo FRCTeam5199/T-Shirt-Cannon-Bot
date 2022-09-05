@@ -34,7 +34,6 @@ public class Tonkerdrive {
         left2.follow(left1);
         right2.follow(right1);
 
-        left1.setInverted(isInverted);
         right1.setInverted(isInverted);
 
     }

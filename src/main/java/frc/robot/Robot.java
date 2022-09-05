@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
                 ledManager.safetymode();
                 }
             }catch(IllegalAccessError | InterruptedException error){
-                System.out.println("LED's Failed!");
+                System.out.println(" ");
             }
         }
         public void start(){
@@ -61,7 +61,7 @@ public class Robot extends TimedRobot {
 
     // Control
     public static boolean driveEnabled = true;
-    private boolean shooterEnabled = true;
+    private boolean shooterEnabled = false;
     private boolean hoodEnabled = true;
 
     // Inputs
@@ -71,7 +71,7 @@ public class Robot extends TimedRobot {
     // hood
     // TODO set motor IDs; the current values are PLACEHOLDERS
     TiltHood hood;
-    static final int tiltMotorID = 0;
+    static final int tiltMotorID = 7;
     static final int shooterSolenoidID = 5;
     static final int reserveSolenoidID = 6;
 
