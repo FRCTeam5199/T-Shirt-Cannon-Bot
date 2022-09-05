@@ -17,7 +17,10 @@ public class TiltHood {
     public static Solenoid reserveSolenoid;
 
     //compressor
-    public static Compressor compressor;
+    public static int compressorID = 0;
+    public static Compressor compressor = new Compressor(compressorID, PneumaticsModuleType.CTREPCM);
+    
+
 
     // constructor for the solenoids & tilt motor, with provided IDs
     // TODO Find the device IDs (not so important at the moment)

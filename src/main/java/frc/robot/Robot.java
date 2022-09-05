@@ -95,6 +95,7 @@ public class Robot extends TimedRobot {
         hood = new TiltHood(tiltMotorID, shooterSolenoidID, reserveSolenoidID);
 
         //Enables compressor if the shooter is also
+        
         if(shooterEnabled) {
             TiltHood.compressor.enableDigital();
         }
