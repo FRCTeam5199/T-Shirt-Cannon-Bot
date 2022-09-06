@@ -89,7 +89,7 @@ public class Robot extends TimedRobot {
         drive.driveInit();
         // removed this "}" here
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
-        controlPanel = new ControlPanel(0);
+        controlPanel = new ControlPanel(1);
 
         hood = new TiltHood(tiltMotorID, shooterSolenoidID, reserveSolenoidID);
 
@@ -162,12 +162,14 @@ public class Robot extends TimedRobot {
             // note: control panel and button values have not been mapped, these might not
             // be the intended buttons
             // note: The hood.moveTo positions might not be correct
-            if ((xboxController.getButton(1) || controlPanel.button1()) && hoodEnabled) {
+            if ((stick1.getButton(1) || controlPanel.button1()) && hoodEnabled) {
                 System.out.println("Hello");
                 hood.setToDefault(0);
-            } else if ((xboxController.getButton(2) || controlPanel.button2()) && hoodEnabled) {
+            } else if ((stick1.getButton(2) || controlPanel.button2()) && hoodEnabled) {
+                System.out.println("Hello");
                 hood.setToDefault(1);
-            } else if ((xboxController.getButton(3) || controlPanel.button3()) && hoodEnabled) {
+            } else if ((stick1.getButton(3) || controlPanel.button3()) && hoodEnabled) {
+                System.out.println("Hello");
                 hood.setToDefault(2);
             }
         }
