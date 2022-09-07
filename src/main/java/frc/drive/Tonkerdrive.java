@@ -39,10 +39,15 @@ public class Tonkerdrive {
     }
     
     //Speed at 50% of max
-    public double maxSpeedPercent = 0.5;
+    public double maxSpeedPercent = 0.20;
 
     public void Teleop() {
-        left1.set(ControlMode.PercentOutput, ((joystick.getLXAxis() + (joystick.getRYAxis() * turnFactor)) * voltageMult) * maxSpeedPercent);
-        right1.set(ControlMode.PercentOutput, ((joystick.getLXAxis() - (joystick.getRYAxis() * turnFactor)) * voltageMult) * maxSpeedPercent);
+        
+        left1.set(ControlMode.PercentOutput, ((joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult) * maxSpeedPercent);
+        right1.set(ControlMode.PercentOutput, ((-joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult) * maxSpeedPercent);
+        
+        //left1.set(ControlMode.PercentOutput, (joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult);
+        //right1.set(ControlMode.PercentOutput, (joystick.getLYAxis() - (joystick.getRXAxis() * turnFactor)) * voltageMult);
+        //System.out.println("driving");
     }
 }

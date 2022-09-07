@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.LED.LEDManager;
 //import edu.wpi.first.wpilibj.XboxController;
 import frc.controllers.ControlPanel;
@@ -62,7 +64,7 @@ public class Robot extends TimedRobot {
 
     // Control
     public static boolean driveEnabled = true;
-    private boolean shooterEnabled = false;
+    private boolean shooterEnabled = true;
     private boolean hoodEnabled = true;
 
     // Inputs
@@ -73,8 +75,9 @@ public class Robot extends TimedRobot {
     // TODO set motor IDs; the current values are PLACEHOLDERS
     TiltHood hood;
     static final int tiltMotorID = 7;
-    static final int shooterSolenoidID = 5;
-    static final int reserveSolenoidID = 6;
+    static final int shooterSolenoidID1 = 0;
+    static final int shooterSolenoidID2 = 1;
+    static final int reserveSolenoidID = 2;
 
     // LED Manager
     LEDManager ledManager = new LEDManager();
@@ -83,25 +86,30 @@ public class Robot extends TimedRobot {
     AnalogInput pressureSensor;
     double chargePSI;
 
+    //Safety
+    private boolean safetyMode = false;
+
     @Override
     public void robotInit() {
+        System.out.println("initializing");
+        xboxController = new XboxController(0);
         stick1 = new XboxController(0);
         drive.driveInit();
         // removed this "}" here
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         controlPanel = new ControlPanel(1);
 
-        hood = new TiltHood(tiltMotorID, shooterSolenoidID, reserveSolenoidID);
+        hood = new TiltHood(tiltMotorID, shooterSolenoidID1, shooterSolenoidID2, reserveSolenoidID);
 
         //Enables compressor if the shooter is also
-        
+        /*TODO
         if(shooterEnabled) {
             TiltHood.compressor.enableDigital();
         }
         else {
             TiltHood.compressor.disable();
         }
-
+        */
         ledManager.test();
 
         // TODO ensure with electrical team that the pressure sensor is plugged into
@@ -129,6 +137,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopPeriodic() {
+        //System.out.println("tele-op");
         WarningLed warning = new WarningLed("orange");
 
         ledManager.capoLEDMode();
@@ -136,16 +145,23 @@ public class Robot extends TimedRobot {
         if (/*controlPanel.killSwitch()TODO*/ true) {
             // Drive
             drive.Teleop();
+            /*TODO
+            if(stick1.getButton(6)) {
+                safetyMode = !safetyMode;
+                System.out.println("safety is " + safetyMode);
+                Timer.delay(1);
+            }
+            */
 
             // Shooter
             // getVoltage returns a voltage between 0 and 5v
             // The REV website states that with this model of sensor 5v = 200 psi
             // TODO Currently firing at 110 PSI, check with shooter group that this is what
             // they want
-            if (true/*controlPanel.safetySwitch()TODO*/) {
+            if (true/*safetyMode8*//*controlPanel.safetySwitch()TODO*/) {
                 warning.start();
                 chargePSI = pressureSensor.getVoltage() * 40;
-                if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled && chargePSI >= 60) {
+                if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled /*&& chargePSI >= 60 TODO*/) {
                     hood.closeReserve();
                     hood.fireShot();
                 } else {

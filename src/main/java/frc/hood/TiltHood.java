@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class TiltHood {
     // hood/tilt motor for angle
@@ -13,7 +14,7 @@ public class TiltHood {
     int angleIndex = 2; //default to 60 degrees
     
     // solenoids for shooting t-shirts
-    public static Solenoid shooterSolenoid;
+    public static DoubleSolenoid shooterSolenoid;
     public static Solenoid reserveSolenoid;
 
     //compressor
@@ -24,12 +25,12 @@ public class TiltHood {
 
     // constructor for the solenoids & tilt motor, with provided IDs
     // TODO Find the device IDs (not so important at the moment)
-    public TiltHood(int tiltMotorID, int shooterSolenoidID, int reserveSolenoidID){
+    public TiltHood(int tiltMotorID, int shooterSolenoidID1, int shooterSolenoidID2, int reserveSolenoidID){
         // initialize tilt motor & shooters; link them to device IDs
         tiltMotor = new VictorSPX(tiltMotorID);
         this.setToAngle(anglePositions[angleIndex]);
 
-        shooterSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, shooterSolenoidID);
+        shooterSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, shooterSolenoidID1, shooterSolenoidID2);
         reserveSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, reserveSolenoidID);
 
         // set speed of motor to 0.5 (50%)
@@ -68,20 +69,22 @@ public class TiltHood {
     
     // functions from previous shooter class
     public void fireShot() {
-        reserveSolenoid.set(false);
-        shooterSolenoid.set(true);
+        System.out.println("firing");
+        reserveSolenoid.set(true); //inverted
+        shooterSolenoid.set(Value.kForward);
     } 
 
     public void resetShooter() {
-        shooterSolenoid.set(false);
+        System.out.println("reset shooter");
+        shooterSolenoid.set(Value.kReverse);
     }
 
     public void openReserve() {
-        shooterSolenoid.set(false);
-        reserveSolenoid.set(true);
+        shooterSolenoid.set(Value.kReverse);
+        reserveSolenoid.set(false); //inverted
     }
 
     public void closeReserve() {
-        reserveSolenoid.set(false);
+        reserveSolenoid.set(true); //inverted
     }
 }
