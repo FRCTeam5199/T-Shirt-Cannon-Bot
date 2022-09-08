@@ -86,6 +86,9 @@ public class Robot extends TimedRobot {
     AnalogInput pressureSensor;
     double chargePSI;
 
+    //Compressor
+    private boolean compressorEnabled = true;
+
     //Safety
     private boolean safetyMode = false;
 
@@ -146,12 +149,26 @@ public class Robot extends TimedRobot {
             // Drive
             drive.Teleop();
             /*TODO
+
             if(stick1.getButton(6)) {
                 safetyMode = !safetyMode;
                 System.out.println("safety is " + safetyMode);
                 Timer.delay(1);
             }
             */
+
+            if(stick1.getButton(5)) {
+                if(compressorEnabled == true) {
+                    TiltHood.compressor.enableDigital();
+                }
+                else {
+                    TiltHood.compressor.disable();
+                }
+                
+                compressorEnabled = !compressorEnabled;
+                Timer.delay(1);
+            }
+
 
             // Shooter
             // getVoltage returns a voltage between 0 and 5v
@@ -166,7 +183,7 @@ public class Robot extends TimedRobot {
                     hood.fireShot();
                 } else {
                     hood.resetShooter();
-                    if (chargePSI < 60) {
+                    if (chargePSI < 90) {
                         hood.openReserve();
                     } else {
                         hood.closeReserve();
