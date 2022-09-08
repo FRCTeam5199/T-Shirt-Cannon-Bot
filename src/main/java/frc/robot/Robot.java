@@ -195,16 +195,7 @@ public class Robot extends TimedRobot {
             // note: control panel and button values have not been mapped, these might not
             // be the intended buttons
             // note: The hood.moveTo positions might not be correct
-            if ((stick1.getButton(1) || controlPanel.button1()) && hoodEnabled) {
-                System.out.println("Hello");
-                hood.setToDefault(0);
-            } else if ((stick1.getButton(2) || controlPanel.button2()) && hoodEnabled) {
-                System.out.println("Hello");
-                hood.setToDefault(1);
-            } else if ((stick1.getButton(3) || controlPanel.button3()) && hoodEnabled) {
-                System.out.println("Hello");
-                hood.setToDefault(2);
-            }
+
         }
     }
 

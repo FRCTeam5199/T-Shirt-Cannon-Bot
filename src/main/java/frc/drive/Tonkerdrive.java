@@ -54,13 +54,14 @@ public class Tonkerdrive {
         //System.out.println("driving");
         
         if(joystick.getButton(1)) {
-            tilt.set(ControlMode.Position, 0);
+            System.out.println("hello");
+            tilt.set(ControlMode.Position, 30 * (4096.0 / 360.0));
         }
         if(joystick.getButton(2)) {
-            tilt.set(ControlMode.Position, 0);
+            tilt.set(ControlMode.Position, 45 * (4096.0 / 360.0));
         }
         if(joystick.getButton(3)) {
-            tilt.set(ControlMode.Position, 0);
+            tilt.set(ControlMode.Position, 60 * (4096.0 / 360.0));
         }
     }
 }
