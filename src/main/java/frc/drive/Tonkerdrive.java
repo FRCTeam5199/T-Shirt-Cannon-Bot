@@ -13,10 +13,12 @@ public class Tonkerdrive {
     public static VictorSPX left2;
     public static VictorSPX right1;
     public static VictorSPX right2;
+    public static VictorSPX tilt;
     public static final int left1DeviceID = 1;
     public static final int left2DeviceID = 2;
     public static final int right1DeviceID = 3;
     public static final int right2DeviceID = 4;
+    public static final int tiltID = 7;
     private double turnFactor = 0.3;
     private double voltageMult = 9.2;
     public boolean isInverted = false;
@@ -30,6 +32,7 @@ public class Tonkerdrive {
         left2 = new VictorSPX(left2DeviceID);
         right1 = new VictorSPX(right1DeviceID);
         right2 = new VictorSPX(right2DeviceID);
+        tilt = new VictorSPX(tiltID);
         
         left2.follow(left1);
         right2.follow(right1);
@@ -49,5 +52,15 @@ public class Tonkerdrive {
         //left1.set(ControlMode.PercentOutput, (joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult);
         //right1.set(ControlMode.PercentOutput, (joystick.getLYAxis() - (joystick.getRXAxis() * turnFactor)) * voltageMult);
         //System.out.println("driving");
+        
+        if(joystick.getButton(1)) {
+            tilt.set(ControlMode.Position, 0);
+        }
+        if(joystick.getButton(2)) {
+            tilt.set(ControlMode.Position, 0);
+        }
+        if(joystick.getButton(3)) {
+            tilt.set(ControlMode.Position, 0);
+        }
     }
 }
