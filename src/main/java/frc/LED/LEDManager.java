@@ -11,22 +11,34 @@ public class LEDManager {
     XboxController xboxController = new XboxController(0);
     ControlPanel panelofcontrol = new ControlPanel(1);
     ControlPanel controlPanel;
-    static AddressableLED LEDRGB = new AddressableLED(1);
-    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(500);
+    static AddressableLED LEDRGB = new AddressableLED(0);
+    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(60);
     Timer timer = new Timer();
     boolean swap = false;
 
     public void Init() {
         timer.start();
-        LEDRGB.setLength(LEDBUFFER.getLength());
-        LEDRGB.setData(LEDBUFFER);
+        //LEDRGB.setLength(LEDBUFFER.getLength());
+        //LEDRGB.setData(LEDBUFFER);
+        //LEDRGB.start();
     }
 
     public void test() {
+        for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            LEDBUFFER.setRGB(i, 255, 0, 0);
+        }
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
+    }
+
+    public void Rainbow() {
         int[][] Rainer = new int[][]{{255, 0, 0}, {245, 167, 12}, {255, 248, 9}, {0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {128, 0, 255}, {255, 0, 140}};
         for (int Rainbow = 0; Rainbow < LEDBUFFER.getLength(); Rainbow++) {
             LEDBUFFER.setRGB(Rainbow, Rainer[Rainbow % 8][0], Rainer[Rainbow % 8][1], Rainer[Rainbow % 8][2]);
+            //LEDRGB.setData(LEDBUFFER);
         }
+        //LEDRGB.setData(LEDBUFFER);
     }
 
     public void DOLPHIN() {
@@ -35,7 +47,9 @@ public class LEDManager {
         }
         for (int grey = 0; grey < LEDBUFFER.getLength(); grey++) {
             LEDBUFFER.setRGB(grey, 139, 139, 141);
+            //LEDRGB.setData(LEDBUFFER);
         }
+        //LEDRGB.setData(LEDBUFFER);
     }
 
 
@@ -48,7 +62,9 @@ public class LEDManager {
             }
             swap = !swap;
             timer.reset();
+            //LEDRGB.setData(LEDBUFFER);
         }
+        //LEDRGB.setData(LEDBUFFER);
     }
 
     public void safetymode() throws InterruptedException {

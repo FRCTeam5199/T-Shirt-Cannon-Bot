@@ -38,7 +38,13 @@ public class XboxController {
         return stick1.getRawButton(n);
     }
 
+    public boolean getDPadUp() {
+        return (stick1.getPOV() == 180);
+    }
 
+    public boolean getDPadDown() {
+        return (stick1.getPOV() == 0);
+    }
 
     public void setLRumble(double n) {
         stick1.setRumble(RumbleType.kLeftRumble, n);

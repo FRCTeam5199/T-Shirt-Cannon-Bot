@@ -113,7 +113,8 @@ public class Robot extends TimedRobot {
             TiltHood.compressor.disable();
         }
         */
-        ledManager.test();
+
+        //ledManager.test(); TODO
 
         // TODO ensure with electrical team that the pressure sensor is plugged into
         // analog port 0 on the rio
@@ -134,8 +135,10 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        System.out.println("initalizing");
         stick1 = new XboxController(0);
         hood.resetShooter();
+        System.out.println("done initalizing");
     }
 
     @Override
@@ -156,7 +159,9 @@ public class Robot extends TimedRobot {
                 Timer.delay(1);
             }
             */
-
+            System.out.println("compressor enabled is " + compressorEnabled);
+            TiltHood.compressor.enableDigital();
+            /*TODO
             if(stick1.getButton(5)) {
                 if(compressorEnabled == true) {
                     TiltHood.compressor.enableDigital();
@@ -166,8 +171,10 @@ public class Robot extends TimedRobot {
                 }
                 
                 compressorEnabled = !compressorEnabled;
+                
                 Timer.delay(1);
             }
+            */
 
 
             // Shooter

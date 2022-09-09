@@ -53,6 +53,7 @@ public class Tonkerdrive {
         //right1.set(ControlMode.PercentOutput, (joystick.getLYAxis() - (joystick.getRXAxis() * turnFactor)) * voltageMult);
         //System.out.println("driving");
         
+        /*
         if(joystick.getButton(1)) {
             System.out.println("hello");
             tilt.set(ControlMode.Position, 30 * (4096.0 / 360.0));
@@ -62,6 +63,19 @@ public class Tonkerdrive {
         }
         if(joystick.getButton(3)) {
             tilt.set(ControlMode.Position, 60 * (4096.0 / 360.0));
+        }
+        */
+        //System.out.println("d-pad-up is " + joystick.getDPadUp());
+        if(joystick.getDPadUp()) {
+            tilt.setInverted(false);
+            tilt.set(ControlMode.PercentOutput, 0.6);
+        }
+        else if(joystick.getDPadDown()) {
+            tilt.setInverted(true);
+            tilt.set(ControlMode.PercentOutput, 0.6);
+        }
+        else {
+            tilt.set(ControlMode.PercentOutput, 0);
         }
     }
 }

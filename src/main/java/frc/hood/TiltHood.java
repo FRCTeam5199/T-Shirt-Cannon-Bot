@@ -75,7 +75,7 @@ public class TiltHood {
     } 
 
     public void resetShooter() {
-        System.out.println("reset shooter");
+        //System.out.println("reset shooter");
         shooterSolenoid.set(Value.kReverse);
     }
 
