@@ -12,7 +12,7 @@ public class LEDManager {
     ControlPanel panelofcontrol = new ControlPanel(1);
     ControlPanel controlPanel;
     static AddressableLED LEDRGB = new AddressableLED(0);
-    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(60);
+    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(30);
     Timer timer = new Timer();
     boolean swap = false;
 

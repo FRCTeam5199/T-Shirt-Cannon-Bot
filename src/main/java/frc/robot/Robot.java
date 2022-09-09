@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.WaitCommand;
@@ -15,6 +16,9 @@ import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 import frc.hood.TiltHood;
+//import com.ctre.phoenix.*;
+//import com.ctre.phoenix.motorcontrol.*;
+//import com.ctre.phoenix.motorcontrol.can.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the methods
@@ -88,6 +92,7 @@ public class Robot extends TimedRobot {
 
     //Compressor
     private boolean compressorEnabled = true;
+    //Compressor compressor = new Compressor(0, PneumaticsModuleType.REVPH);
 
     //Safety
     private boolean safetyMode = false;
@@ -161,6 +166,7 @@ public class Robot extends TimedRobot {
             */
             System.out.println("compressor enabled is " + compressorEnabled);
             TiltHood.compressor.enableDigital();
+            //compressor.enableDigital();
             /*TODO
             if(stick1.getButton(5)) {
                 if(compressorEnabled == true) {

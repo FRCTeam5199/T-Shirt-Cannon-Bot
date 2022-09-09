@@ -18,8 +18,8 @@ public class TiltHood {
     public static Solenoid reserveSolenoid;
 
     //compressor
-    public static int compressorID = 0;
-    public static Compressor compressor = new Compressor(compressorID, PneumaticsModuleType.CTREPCM);
+    public static int compressorID = 1;
+    public static Compressor compressor = new Compressor(compressorID, PneumaticsModuleType.REVPH);
     
 
 
@@ -30,8 +30,8 @@ public class TiltHood {
         tiltMotor = new VictorSPX(tiltMotorID);
         this.setToAngle(anglePositions[angleIndex]);
 
-        shooterSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, shooterSolenoidID1, shooterSolenoidID2);
-        reserveSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, reserveSolenoidID);
+        shooterSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, shooterSolenoidID1, shooterSolenoidID2);
+        reserveSolenoid = new Solenoid(PneumaticsModuleType.REVPH, reserveSolenoidID);
 
         // set speed of motor to 0.5 (50%)
         if (tiltMotor.configPeakOutputForward(0.5).equals(ErrorCode.OK)
