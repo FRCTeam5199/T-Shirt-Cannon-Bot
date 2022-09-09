@@ -87,4 +87,9 @@ public class TiltHood {
     public void closeReserve() {
         reserveSolenoid.set(true); //inverted
     }
+
+    public void closeAll() {
+        shooterSolenoid.set(Value.kReverse);
+        reserveSolenoid.set(true); //inverted
+    }
 }

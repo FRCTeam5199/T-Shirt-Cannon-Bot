@@ -91,8 +91,11 @@ public class Robot extends TimedRobot {
     double chargePSI;
 
     //Compressor
-    private boolean compressorEnabled = true;
+    private boolean compressorEnabled = false;
     //Compressor compressor = new Compressor(0, PneumaticsModuleType.REVPH);
+
+    //pre fireing
+    private boolean isPrefiring = false;
 
     //Safety
     private boolean safetyMode = false;
@@ -143,6 +146,7 @@ public class Robot extends TimedRobot {
         System.out.println("initalizing");
         stick1 = new XboxController(0);
         hood.resetShooter();
+        ledManager.yellow();
         System.out.println("done initalizing");
     }
 
@@ -151,7 +155,7 @@ public class Robot extends TimedRobot {
         //System.out.println("tele-op");
         WarningLed warning = new WarningLed("orange");
 
-        ledManager.capoLEDMode();
+        //ledManager.capoLEDMode();TODO
 
         if (/*controlPanel.killSwitch()TODO*/ true) {
             // Drive
@@ -164,11 +168,12 @@ public class Robot extends TimedRobot {
                 Timer.delay(1);
             }
             */
-            System.out.println("compressor enabled is " + compressorEnabled);
-            TiltHood.compressor.enableDigital();
+            //System.out.println("compressor enabled is " + compressorEnabled);
+            //TiltHood.compressor.enableDigital();
             //compressor.enableDigital();
-            /*TODO
-            if(stick1.getButton(5)) {
+            
+            if(xboxController.getButton(5) || stick1.getButton(5)) {
+                System.out.println("toggling compressor");
                 if(compressorEnabled == true) {
                     TiltHood.compressor.enableDigital();
                 }
@@ -180,7 +185,7 @@ public class Robot extends TimedRobot {
                 
                 Timer.delay(1);
             }
-            */
+        
 
 
             // Shooter
@@ -192,15 +197,40 @@ public class Robot extends TimedRobot {
                 warning.start();
                 chargePSI = pressureSensor.getVoltage() * 40;
                 if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled /*&& chargePSI >= 60 TODO*/) {
+                    isPrefiring = false;
                     hood.closeReserve();
                     hood.fireShot();
+                }
+                /*
                 } else {
                     hood.resetShooter();
+                    //hood.closeReserve();
                     if (chargePSI < 90) {
                         hood.openReserve();
                     } else {
                         hood.closeReserve();
                     }
+                }
+                */
+                //Pre-fire
+                else if(xboxController.getButton(2) || stick1.getButton(2)) {
+                    isPrefiring = !isPrefiring;
+                    Timer.delay(0.5);
+                }
+                else if(isPrefiring == true) {
+                    hood.openReserve();
+                    ledManager.test();
+                    System.out.println("pre-firing");
+                }
+                else {
+                    hood.closeAll();
+                    ledManager.yellow();
+                }
+
+                //Disable compressor if PSI above 120
+                if(chargePSI >= 120) {
+                    TiltHood.compressor.disable();
+                    compressorEnabled = false;
                 }
             }
 

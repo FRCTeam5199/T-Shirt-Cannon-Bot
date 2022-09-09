@@ -12,7 +12,7 @@ public class LEDManager {
     ControlPanel panelofcontrol = new ControlPanel(1);
     ControlPanel controlPanel;
     static AddressableLED LEDRGB = new AddressableLED(0);
-    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(30);
+    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(89);
     Timer timer = new Timer();
     boolean swap = false;
 
@@ -32,11 +32,23 @@ public class LEDManager {
         LEDRGB.start();
     }
 
+    public void yellow() {
+        for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            LEDBUFFER.setRGB(i, 255, 255, 0);
+        }
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
+    }
+
     public void Rainbow() {
         int[][] Rainer = new int[][]{{255, 0, 0}, {245, 167, 12}, {255, 248, 9}, {0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {128, 0, 255}, {255, 0, 140}};
         for (int Rainbow = 0; Rainbow < LEDBUFFER.getLength(); Rainbow++) {
             LEDBUFFER.setRGB(Rainbow, Rainer[Rainbow % 8][0], Rainer[Rainbow % 8][1], Rainer[Rainbow % 8][2]);
             //LEDRGB.setData(LEDBUFFER);
+            LEDRGB.setLength(LEDBUFFER.getLength());
+            LEDRGB.setData(LEDBUFFER);
+            LEDRGB.start();
         }
         //LEDRGB.setData(LEDBUFFER);
     }
@@ -62,6 +74,9 @@ public class LEDManager {
             }
             swap = !swap;
             timer.reset();
+            LEDRGB.setLength(LEDBUFFER.getLength());
+            LEDRGB.setData(LEDBUFFER);
+            LEDRGB.start();
             //LEDRGB.setData(LEDBUFFER);
         }
         //LEDRGB.setData(LEDBUFFER);

@@ -68,11 +68,11 @@ public class Tonkerdrive {
         //System.out.println("d-pad-up is " + joystick.getDPadUp());
         if(joystick.getDPadUp()) {
             tilt.setInverted(false);
-            tilt.set(ControlMode.PercentOutput, 0.6);
+            tilt.set(ControlMode.PercentOutput, 0.35);
         }
         else if(joystick.getDPadDown()) {
             tilt.setInverted(true);
-            tilt.set(ControlMode.PercentOutput, 0.6);
+            tilt.set(ControlMode.PercentOutput, 0.35);
         }
         else {
             tilt.set(ControlMode.PercentOutput, 0);
