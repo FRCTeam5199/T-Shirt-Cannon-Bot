@@ -96,6 +96,7 @@ public class Robot extends TimedRobot {
 
     //pre fireing
     private boolean isPrefiring = false;
+    private boolean prefiringStrobe = false;
 
     //Safety
     private boolean safetyMode = false;
@@ -198,6 +199,7 @@ public class Robot extends TimedRobot {
                 chargePSI = pressureSensor.getVoltage() * 40;
                 if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled /*&& chargePSI >= 60 TODO*/) {
                     isPrefiring = false;
+                    prefiringStrobe = false;
                     hood.closeReserve();
                     hood.fireShot();
                 }
@@ -213,18 +215,30 @@ public class Robot extends TimedRobot {
                 }
                 */
                 //Pre-fire
+                else if(xboxController.getButton(3) || stick1.getButton(3)) {
+                    prefiringStrobe = !prefiringStrobe;
+                    Timer.delay(0.5);
+                }
                 else if(xboxController.getButton(2) || stick1.getButton(2)) {
                     isPrefiring = !isPrefiring;
                     Timer.delay(0.5);
                 }
                 else if(isPrefiring == true) {
                     hood.openReserve();
-                    ledManager.test();
+                    if(prefiringStrobe) {
+                        ledManager.yellow();
+                        Timer.delay(0.15);
+                        ledManager.test();
+                        Timer.delay(0.15);
+                    }
+                    else {
+                        ledManager.test();
+                    }
                     System.out.println("pre-firing");
                 }
                 else {
                     hood.closeAll();
-                    ledManager.yellow();
+                    ledManager.Rainbow3();
                 }
 
                 //Disable compressor if PSI above 120

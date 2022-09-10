@@ -15,6 +15,7 @@ public class LEDManager {
     static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(89);
     Timer timer = new Timer();
     boolean swap = false;
+    int firstPixelHue = 0;
 
     public void Init() {
         timer.start();
@@ -51,6 +52,20 @@ public class LEDManager {
             LEDRGB.start();
         }
         //LEDRGB.setData(LEDBUFFER);
+    }
+
+    public void Rainbow2() {
+        for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            final var hue = (firstPixelHue + (i * 180 / LEDBUFFER.getLength())) % 180;
+            LEDBUFFER.setHSV(i, hue, 255, 128);
+        }
+        firstPixelHue += 3;
+        firstPixelHue %= 180;
+    }
+
+    public void Rainbow3() {
+        Rainbow2();
+        LEDRGB.setData(LEDBUFFER);
     }
 
     public void DOLPHIN() {
