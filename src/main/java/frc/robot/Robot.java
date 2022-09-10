@@ -33,14 +33,11 @@ public class Robot extends TimedRobot {
     public static XboxController stick1;
     public static Tonkerdrive drive = new Tonkerdrive();
 
-
-
     /**
      * This method is run when the robot is first started up and should be used for
      * any
      * initialization code.
      */
-
 
     public class WarningLed implements Runnable{
         private Thread t;
@@ -66,6 +63,8 @@ public class Robot extends TimedRobot {
         }
     }
 
+    //Variables
+
     // Control
     public static boolean driveEnabled = true;
     private boolean shooterEnabled = true;
@@ -76,7 +75,6 @@ public class Robot extends TimedRobot {
     ControlPanel controlPanel;
 
     // hood
-    // TODO set motor IDs; the current values are PLACEHOLDERS
     TiltHood hood;
     static final int tiltMotorID = 7;
     static final int shooterSolenoidID1 = 0;
@@ -101,32 +99,19 @@ public class Robot extends TimedRobot {
     //Safety
     private boolean safetyMode = false;
 
+    //Main
     @Override
+
+    //Robot Init
     public void robotInit() {
         System.out.println("initializing");
         xboxController = new XboxController(0);
         stick1 = new XboxController(0);
         drive.driveInit();
-        // removed this "}" here
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         controlPanel = new ControlPanel(1);
 
         hood = new TiltHood(tiltMotorID, shooterSolenoidID1, shooterSolenoidID2, reserveSolenoidID);
-
-        //Enables compressor if the shooter is also
-        /*TODO
-        if(shooterEnabled) {
-            TiltHood.compressor.enableDigital();
-        }
-        else {
-            TiltHood.compressor.disable();
-        }
-        */
-
-        //ledManager.test(); TODO
-
-        // TODO ensure with electrical team that the pressure sensor is plugged into
-        // analog port 0 on the rio
         pressureSensor = new AnalogInput(0);
     }
 
@@ -142,6 +127,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
     }
 
+    //Tele-op init
     @Override
     public void teleopInit() {
         System.out.println("initalizing");
@@ -151,28 +137,28 @@ public class Robot extends TimedRobot {
         System.out.println("done initalizing");
     }
 
+    //Tele-op periodic
     @Override
     public void teleopPeriodic() {
-        //System.out.println("tele-op");
+
         WarningLed warning = new WarningLed("orange");
 
         //ledManager.capoLEDMode();TODO
 
         if (/*controlPanel.killSwitch()TODO*/ true) {
+
             // Drive
             drive.Teleop();
+            
             /*TODO
-
             if(stick1.getButton(6)) {
                 safetyMode = !safetyMode;
                 System.out.println("safety is " + safetyMode);
                 Timer.delay(1);
             }
             */
-            //System.out.println("compressor enabled is " + compressorEnabled);
-            //TiltHood.compressor.enableDigital();
-            //compressor.enableDigital();
             
+            //Toggle compressor with Left-bumper
             if(xboxController.getButton(5) || stick1.getButton(5)) {
                 System.out.println("toggling compressor");
                 if(compressorEnabled == true) {
@@ -192,11 +178,11 @@ public class Robot extends TimedRobot {
             // Shooter
             // getVoltage returns a voltage between 0 and 5v
             // The REV website states that with this model of sensor 5v = 200 psi
-            // TODO Currently firing at 110 PSI, check with shooter group that this is what
-            // they want
             if (true/*safetyMode8*//*controlPanel.safetySwitch()TODO*/) {
                 warning.start();
                 chargePSI = pressureSensor.getVoltage() * 40;
+
+                //Fire
                 if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled /*&& chargePSI >= 60 TODO*/) {
                     isPrefiring = false;
                     prefiringStrobe = false;
@@ -214,11 +200,12 @@ public class Robot extends TimedRobot {
                     }
                 }
                 */
-                //Pre-fire
+                //Pre-fire strobe
                 else if(xboxController.getButton(3) || stick1.getButton(3)) {
                     prefiringStrobe = !prefiringStrobe;
                     Timer.delay(0.5);
                 }
+                //Pre-fire
                 else if(xboxController.getButton(2) || stick1.getButton(2)) {
                     isPrefiring = !isPrefiring;
                     Timer.delay(0.5);
@@ -247,12 +234,6 @@ public class Robot extends TimedRobot {
                     compressorEnabled = false;
                 }
             }
-
-            // TODO Hood
-            // note: control panel and button values have not been mapped, these might not
-            // be the intended buttons
-            // note: The hood.moveTo positions might not be correct
-
         }
     }
 

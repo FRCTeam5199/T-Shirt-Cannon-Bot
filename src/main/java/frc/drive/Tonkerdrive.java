@@ -46,12 +46,9 @@ public class Tonkerdrive {
 
     public void Teleop() {
         
+        //Drive
         left1.set(ControlMode.PercentOutput, ((joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult) * maxSpeedPercent);
         right1.set(ControlMode.PercentOutput, ((-joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult) * maxSpeedPercent);
-        
-        //left1.set(ControlMode.PercentOutput, (joystick.getLYAxis() + (joystick.getRXAxis() * turnFactor)) * voltageMult);
-        //right1.set(ControlMode.PercentOutput, (joystick.getLYAxis() - (joystick.getRXAxis() * turnFactor)) * voltageMult);
-        //System.out.println("driving");
         
         /*
         if(joystick.getButton(1)) {
@@ -65,6 +62,8 @@ public class Tonkerdrive {
             tilt.set(ControlMode.Position, 60 * (4096.0 / 360.0));
         }
         */
+
+        //Tilt
         //System.out.println("d-pad-up is " + joystick.getDPadUp());
         if(joystick.getDPadUp()) {
             tilt.setInverted(false);
