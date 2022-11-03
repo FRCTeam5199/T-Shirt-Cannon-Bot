@@ -11,7 +11,7 @@ public class ControlPanel {
 
     public boolean shoot(){
         //TODO was 0
-        return panel.getRawButton(5);
+        return panel.getRawButton(8);
     }
 
     public boolean button1 () {
@@ -31,7 +31,7 @@ public class ControlPanel {
 
      //added by Ethan
      //TODO map both of these to the control panel
-     public boolean safetySwitch () {return panel.getRawButton(5);}
+     public boolean safetySwitch () {return panel.getRawButton(3);}
 
-     public boolean killSwitch () {return panel.getRawButton(6);}
+     public boolean killSwitch () {return panel.getRawButton(0);}
 }

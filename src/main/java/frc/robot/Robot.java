@@ -31,6 +31,7 @@ import frc.hood.TiltHood;
  */
 public class Robot extends TimedRobot {
     public static XboxController stick1;
+    public static ControlPanel controlPanel;
     public static Tonkerdrive drive = new Tonkerdrive();
 
     /**
@@ -72,7 +73,6 @@ public class Robot extends TimedRobot {
 
     // Inputs
     XboxController xboxController;
-    ControlPanel controlPanel;
 
     // hood
     TiltHood hood;
@@ -109,7 +109,7 @@ public class Robot extends TimedRobot {
         stick1 = new XboxController(0);
         drive.driveInit();
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
-        controlPanel = new ControlPanel(1);
+        controlPanel = new ControlPanel(2);
 
         hood = new TiltHood(tiltMotorID, shooterSolenoidID1, shooterSolenoidID2, reserveSolenoidID);
         pressureSensor = new AnalogInput(0);
@@ -201,12 +201,12 @@ public class Robot extends TimedRobot {
                 }
                 */
                 //Pre-fire strobe
-                else if(xboxController.getButton(3) || stick1.getButton(3)) {
+                else if(xboxController.getButton(3) || stick1.getButton(3) || controlPanel.safetySwitch()) {
                     prefiringStrobe = !prefiringStrobe;
                     Timer.delay(0.5);
                 }
                 //Pre-fire
-                else if(xboxController.getButton(2) || stick1.getButton(2)) {
+                else if(xboxController.getButton(2) || stick1.getButton(2) || controlPanel.safetySwitch()) {
                     isPrefiring = !isPrefiring;
                     Timer.delay(0.5);
                 }

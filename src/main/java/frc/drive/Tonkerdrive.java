@@ -19,7 +19,7 @@ public class Tonkerdrive {
     public static final int right1DeviceID = 3;
     public static final int right2DeviceID = 4;
     public static final int tiltID = 7;
-    private double turnFactor = 0.3;
+    private double turnFactor = 0.5;
     private double voltageMult = 9.2;
     public boolean isInverted = false;
     private XboxController joystick = new XboxController(0);
@@ -42,7 +42,7 @@ public class Tonkerdrive {
     }
     
     //Speed at 50% of max
-    public double maxSpeedPercent = 0.20;
+    public double maxSpeedPercent = 0.1;
 
     public void Teleop() {
         
