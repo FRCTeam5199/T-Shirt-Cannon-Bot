@@ -77,7 +77,7 @@ public class Robot extends TimedRobot {
     // hood
     TiltHood hood;
     static final int tiltMotorID = 7;
-    static final int shooterSolenoidID1 = 0;
+    static final int shooterSolenoidID1 = 3;
     static final int shooterSolenoidID2 = 1;
     static final int reserveSolenoidID = 2;
 
