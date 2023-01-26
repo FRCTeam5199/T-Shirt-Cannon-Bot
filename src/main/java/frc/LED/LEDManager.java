@@ -42,6 +42,65 @@ public class LEDManager {
         LEDRGB.start();
     }
 
+    public void purple() {
+        for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            LEDBUFFER.setRGB(i, 138, 43, 226);
+        }
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
+    }
+
+    public void blunwhite(){
+        for(var i = 0; i < LEDBUFFER.getLength(); i++){
+            if(i%2 == 0){
+                LEDBUFFER.setRGB(i, 0, 0, 255);
+            }else{
+                LEDBUFFER.setRGB(i, 255, 255, 255);
+            }
+        }
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
+    }
+
+    public void blunwhite2(){
+        int blueFade = 0;
+        int otherFade = 0;
+        boolean blueFadeIn = false;
+
+        for(var i = 0; i < LEDBUFFER.getLength(); i++){
+            if(i%2 == 0){
+                LEDBUFFER.setRGB(i, otherFade, otherFade, blueFade);
+            }else{
+                LEDBUFFER.setRGB(i, 255-otherFade, 255-otherFade, 255-blueFade);
+            }
+            
+            if(blueFadeIn && blueFade < 255) {
+                blueFade++;
+            }
+            else if(blueFadeIn) {
+                blueFadeIn = false;
+            }
+            else if(!blueFadeIn && blueFade < 255) {
+                blueFade++;
+                otherFade++;
+            }
+            else if(!blueFadeIn) {
+                blueFade--;
+            }
+            else {
+                blueFade--;
+                otherFade--;
+            }
+            //System.out.println("bluefade" + blueFade);
+            //System.out.println("otherfade" + otherFade);
+        }
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
+    }
+
     public void Rainbow() {
         int[][] Rainer = new int[][]{{255, 0, 0}, {245, 167, 12}, {255, 248, 9}, {0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {128, 0, 255}, {255, 0, 140}};
         for (int Rainbow = 0; Rainbow < LEDBUFFER.getLength(); Rainbow++) {
