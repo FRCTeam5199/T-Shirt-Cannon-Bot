@@ -95,10 +95,16 @@ public class LEDManager {
             }
             //System.out.println("bluefade" + blueFade);
             //System.out.println("otherfade" + otherFade);
+            //LEDRGB.setData(LEDBUFFER);
         }
-        LEDRGB.setLength(LEDBUFFER.getLength());
+        //LEDRGB.setLength(LEDBUFFER.getLength());
+        //LEDRGB.setData(LEDBUFFER);
+        //LEDRGB.start();
+    }
+
+    public void blunwhite3() {
+        blunwhite2();
         LEDRGB.setData(LEDBUFFER);
-        LEDRGB.start();
     }
 
     public void Rainbow() {

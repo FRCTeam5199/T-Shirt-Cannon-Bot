@@ -231,8 +231,11 @@ public class Robot extends TimedRobot {
                     if(xboxController.getButton(3)) {
                         ledManager.purple();
                     }
+                    if(xboxController.getButton(1)) {
+                        ledManager.Rainbow3();
+                    }
                     if(xboxController.getButton(4)) {
-                        ledManager.blunwhite2();
+                        ledManager.blunwhite3();
                     }
                 }
 
