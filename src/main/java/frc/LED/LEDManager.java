@@ -17,11 +17,39 @@ public class LEDManager {
     boolean swap = false;
     int firstPixelHue = 0;
 
+    //Blue and White
+    int blueColorFade = 0;
+    int otherColorFade = 0;
+    boolean fadeUpBool = true; 
+    boolean fadeBlueBool = true;
+    int fadeSpeed = 8;
+
+
     public void Init() {
         timer.start();
         //LEDRGB.setLength(LEDBUFFER.getLength());
         //LEDRGB.setData(LEDBUFFER);
         //LEDRGB.start();
+    }
+
+    public int fadeUp(int i) {
+        if(i < 255) {
+            i = i + fadeSpeed;
+        }
+        if(i > 255) {
+            i = 255;
+        }
+        return i;
+    }
+
+    public int fadeDown(int i) {
+        if(i > 0) {
+            i = i - fadeSpeed;
+        }
+        if(i < 0) {
+            i = 0;
+        }
+        return i;
     }
 
     public void test() {
@@ -105,6 +133,68 @@ public class LEDManager {
     public void blunwhite3() {
         blunwhite2();
         LEDRGB.setData(LEDBUFFER);
+    }
+
+    public void blunwhite4() {
+        for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            LEDBUFFER.setRGB(i, otherColorFade, otherColorFade, blueColorFade);
+        }
+        
+        //Fade the LEDs
+        if(fadeUpBool && fadeBlueBool) {
+            blueColorFade = fadeUp(blueColorFade);
+            otherColorFade = fadeDown(otherColorFade);
+        }
+        else if(fadeUpBool && !fadeBlueBool) {
+            blueColorFade = fadeUp(blueColorFade);
+            otherColorFade = fadeUp(otherColorFade);  
+        }
+        else {
+            //fadeUp(blueColorFade);
+            //fadeUp(otherColorFade);
+            blueColorFade = fadeDown(blueColorFade);
+            otherColorFade = fadeDown(otherColorFade);
+        }
+
+        //Check if done fading
+        if(blueColorFade >= 255) {
+            fadeUpBool = false;
+        }
+        else if((blueColorFade <= 0) && (fadeBlueBool = false)) {
+            fadeBlueBool = true;
+            fadeUpBool = true;
+        }
+        else if(blueColorFade <= 0) {
+            fadeBlueBool = false;
+            fadeUpBool = true;
+        }
+
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
+    }
+
+    public void fadeLED() {
+        for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            LEDBUFFER.setRGB(i, 0, 0, blueColorFade);
+        }
+
+        if(fadeUpBool && blueColorFade < 255) {
+            blueColorFade+=8;
+        } 
+        else if (fadeUpBool) {
+            fadeUpBool = false;
+        }
+        else if(blueColorFade > 0) {
+            blueColorFade-=8;
+        }
+        else {
+            fadeUpBool = true;
+        }
+
+        LEDRGB.setLength(LEDBUFFER.getLength());
+        LEDRGB.setData(LEDBUFFER);
+        LEDRGB.start();
     }
 
     public void Rainbow() {
