@@ -3,16 +3,17 @@ package frc.LED;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.Timer;
+import frc.Constants;
 import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 
 
 public class LEDManager {
-    XboxController xboxController = new XboxController(0);
-    ControlPanel panelofcontrol = new ControlPanel(1);
+    XboxController xboxController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
+    ControlPanel panelofcontrol = new ControlPanel(Constants.PANEL_OF_CONTROL_PORT);
     ControlPanel controlPanel;
-    static AddressableLED LEDRGB = new AddressableLED(0);
-    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(89);
+    static AddressableLED LEDRGB = new AddressableLED(Constants.LED_PORT);
+    static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(Constants.LED_LENGTH);
     Timer timer = new Timer();
     boolean swap = false;
     int firstPixelHue = 0;

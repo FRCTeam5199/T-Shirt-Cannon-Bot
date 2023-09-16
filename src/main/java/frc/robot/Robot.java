@@ -5,11 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.WaitCommand;
+import frc.Constants;
 import frc.LED.LEDManager;
 //import edu.wpi.first.wpilibj.XboxController;
 import frc.controllers.ControlPanel;
@@ -68,7 +66,6 @@ public class Robot extends TimedRobot {
 
     // Control
     public static boolean driveEnabled = true;
-    private boolean shooterEnabled = true;
     private boolean hoodEnabled = true;
 
     // Inputs
@@ -76,10 +73,6 @@ public class Robot extends TimedRobot {
 
     // hood
     TiltHood hood;
-    static final int tiltMotorID = 7;
-    static final int shooterSolenoidID1 = 3;
-    static final int shooterSolenoidID2 = 1;
-    static final int reserveSolenoidID = 2;
 
     // LED Manager
     LEDManager ledManager = new LEDManager();
@@ -105,13 +98,13 @@ public class Robot extends TimedRobot {
     //Robot Init
     public void robotInit() {
         System.out.println("initializing");
-        xboxController = new XboxController(0);
-        stick1 = new XboxController(0);
+        xboxController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
+        stick1 = new XboxController(Constants.XBOX_CONTROLLER_PORT);
         drive.driveInit();
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
-        controlPanel = new ControlPanel(2);
+        controlPanel = new ControlPanel(Constants.CONTROL_PANEL_PORT);
 
-        hood = new TiltHood(tiltMotorID, shooterSolenoidID1, shooterSolenoidID2, reserveSolenoidID);
+        hood = new TiltHood(Constants.TILT_MOTOR_ID, Constants.SHOOTER_SOLENOID_ID_1, Constants.SHOOTER_SOLENOID_ID_2, Constants.RESERVE_SOLENOID_ID);
         pressureSensor = new AnalogInput(0);
     }
 
@@ -131,7 +124,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         System.out.println("initalizing");
-        stick1 = new XboxController(0);
+        stick1 = new XboxController(Constants.XBOX_CONTROLLER_PORT);
         hood.resetShooter();
         ledManager.yellow();
         System.out.println("done initalizing");
@@ -183,7 +176,7 @@ public class Robot extends TimedRobot {
                 chargePSI = pressureSensor.getVoltage() * 40;
 
                 //Fire
-                if ((xboxController.getButton(4) || controlPanel.shoot()) && shooterEnabled /*&& chargePSI >= 60 TODO*/) {
+                if ((xboxController.getButton(4) || controlPanel.shoot()) && Constants.SHOOTER_ENABLED /*&& chargePSI >= 60 TODO*/) {
                     isPrefiring = false;
                     prefiringStrobe = false;
                     hood.closeReserve();

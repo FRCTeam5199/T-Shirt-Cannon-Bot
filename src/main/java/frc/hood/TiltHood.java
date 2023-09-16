@@ -6,11 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.*;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import frc.Constants;
 
 public class TiltHood {
     // hood/tilt motor for angle
     VictorSPX tiltMotor;
-    final double[] anglePositions = {30.0, 45.0, 60.0}; // change for different angle positions
     int angleIndex = 2; //default to 60 degrees
     
     // solenoids for shooting t-shirts
@@ -18,8 +18,7 @@ public class TiltHood {
     public static Solenoid reserveSolenoid;
 
     //compressor
-    public static int compressorID = 1;
-    public static Compressor compressor = new Compressor(compressorID, PneumaticsModuleType.REVPH);
+    public static Compressor compressor = new Compressor(Constants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
     
 
 
@@ -28,7 +27,7 @@ public class TiltHood {
     public TiltHood(int tiltMotorID, int shooterSolenoidID1, int shooterSolenoidID2, int reserveSolenoidID){
         // initialize tilt motor & shooters; link them to device IDs
         tiltMotor = new VictorSPX(tiltMotorID);
-        this.setToAngle(anglePositions[angleIndex]);
+        this.setToAngle(Constants.ANGLE_POSITIONS[angleIndex]);
 
         shooterSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, shooterSolenoidID1, shooterSolenoidID2);
         reserveSolenoid = new Solenoid(PneumaticsModuleType.REVPH, reserveSolenoidID);
@@ -53,16 +52,16 @@ public class TiltHood {
                                                                            // controller
     }
 
-    // and for moving between the set anglePositions, we have these 2 functions
+    // and for moving between the set ANGLE_POSITIONS, we have these 2 functions
     public void setToDefault(int space){
         angleIndex = space;
-        this.setToAngle(anglePositions[space]);
+        this.setToAngle(Constants.ANGLE_POSITIONS[space]);
     }
 
     public void moveDefault(int spaces){
-        if( (angleIndex + spaces > -1) && (angleIndex + spaces < anglePositions.length) ){ // make sure angle moved to exists, and isn't out of bounds
+        if( (angleIndex + spaces > -1) && (angleIndex + spaces < Constants.ANGLE_POSITIONS.length) ){ // make sure angle moved to exists, and isn't out of bounds
             angleIndex += spaces;
-            this.setToAngle(anglePositions[angleIndex]);
+            this.setToAngle(Constants.ANGLE_POSITIONS[angleIndex]);
 
         } else { System.out.println("cannot move anymore, don't break me :("); } // console indication that this crap don't work
     }
