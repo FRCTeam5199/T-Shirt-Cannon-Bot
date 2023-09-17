@@ -23,4 +23,7 @@ public class Constants {
     public static final int RESERVE_SOLENOID_ID = 2;
     public static final double[] ANGLE_POSITIONS = {30.0, 45.0, 60.0}; // change for different angle positions
     public static final int COMPRESSOR_ID = 1;
+    public static final int OVERHEAT_THRESHOLD = 80;
+    public static final boolean ENABLE_OVERHEAT_DETECTION = false;
+    public static final boolean SECOND_TRY = true;
 }
