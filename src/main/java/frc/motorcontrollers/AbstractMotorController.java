@@ -36,7 +36,7 @@ public abstract class AbstractMotorController {
      * @param invert Whether to inver the motor or not
      * @return this object (factory style)
      */
-    public abstract AbstractMotorController setInverted(boolean invert);
+    public abstract AbstractMotorController setInvert(boolean invert);
 
     /**
      * The name is a unique motor identifier that includes the motor type and the id
@@ -64,6 +64,8 @@ public abstract class AbstractMotorController {
      * @param amount requested drive velocity in RPM
      */
     public abstract void moveAtVelocity(double amount);
+
+    public abstract void setPercent(double percent);
 
     /**
      * @param pos requested position
