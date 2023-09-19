@@ -44,7 +44,7 @@ public class SparkMotorController extends AbstractMotorController {
     }
 
     @Override
-    public AbstractMotorController setInverted(boolean invert) {
+    public AbstractMotorController setInvert(boolean invert) {
         motor.setInverted(invert);
         return this;
     }
@@ -70,7 +70,7 @@ public class SparkMotorController extends AbstractMotorController {
             else
                 failureFlag = true;
         return this;
-    }
+    }  
 
     @Override
     public void moveAtVelocity(double velocityRPM) {
@@ -247,5 +247,11 @@ public class SparkMotorController extends AbstractMotorController {
 
     public double getAbsoluteRotations() {
         return encoder.getPosition();
+    }
+
+    @Override
+    public void setPercent(double percent) {
+        // TODO Auto-generated method stub
+        
     }
 }
