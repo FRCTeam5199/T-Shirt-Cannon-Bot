@@ -4,13 +4,18 @@ import com.ctre.phoenix.*;
 import com.ctre.phoenix.motorcontrol.*;
 import com.ctre.phoenix.motorcontrol.can.*;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.Constants;
 
 public class TiltHood {
     // hood/tilt motor for angle
-    VictorSPX tiltMotor;
+    //VictorSPX oldTiltMotor;
+    CANSparkMax tiltMotor;
+    SparkMaxPIDController tiltMotorController;
     int angleIndex = 2; //default to 60 degrees
     
     // solenoids for shooting t-shirts
@@ -19,37 +24,44 @@ public class TiltHood {
 
     //compressor
     public static Compressor compressor = new Compressor(Constants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
-    
-
 
     // constructor for the solenoids & tilt motor, with provided IDs
     // TODO Find the device IDs (not so important at the moment)
     public TiltHood(int tiltMotorID, int shooterSolenoidID1, int shooterSolenoidID2, int reserveSolenoidID){
         // initialize tilt motor & shooters; link them to device IDs
-        tiltMotor = new VictorSPX(tiltMotorID);
+//        oldTiltMotor = new VictorSPX(tiltMotorID);
+
+        tiltMotor = new CANSparkMax(tiltMotorID, CANSparkMaxLowLevel.MotorType.kBrushed);
+        tiltMotorController = tiltMotor.getPIDController();
+        tiltMotorController.setP(Constants.TILT_HOOD_P);
+        tiltMotorController.setI(Constants.TILT_HOOD_I);
+        tiltMotorController.setD(Constants.TILT_HOOD_D);
+
         this.setToAngle(Constants.ANGLE_POSITIONS[angleIndex]);
 
         shooterSolenoid = new DoubleSolenoid(PneumaticsModuleType.REVPH, shooterSolenoidID1, shooterSolenoidID2);
         reserveSolenoid = new Solenoid(PneumaticsModuleType.REVPH, reserveSolenoidID);
 
         // set speed of motor to 0.5 (50%)
-        if (tiltMotor.configPeakOutputForward(0.5).equals(ErrorCode.OK)
-                && tiltMotor.configPeakOutputReverse(0.5).equals(ErrorCode.OK)) {
-            System.out.println("hood motors good to go");
-        } else {
-            System.out.println("this robot does not vibe with the victor motors");
-        }
+//        if (oldTiltMotor.configPeakOutputForward(0.5).equals(ErrorCode.OK)
+//                && oldTiltMotor.configPeakOutputReverse(0.5).equals(ErrorCode.OK)) {
+//            System.out.println("hood motors good to go");
+//        } else {
+//            System.out.println("this robot does not vibe with the victor motors");
+//        }
     }
 
     // i don't know if victor controllers work like this, but it's worth a shot
     public void setToAngle(double angle) {
-        tiltMotor.set(ControlMode.Position, angle * (4096.0 / 360.0)); // convert from angle to the
-                                                                         // 4096-units-per-rotation
+//        oldTiltMotor.set(ControlMode.Position, angle * (4096.0 / 360.0)); // convert from angle to the
+                                                                        // 4096-units-per-rotation
+        tiltMotor.getEncoder().setPosition(angle);
     }
 
     public double getAnglePosition() {
-        return tiltMotor.getSelectedSensorPosition() * (360.0 / 4096.0); // and vice versa here when reading from the
+        //return oldTiltMotor.getSelectedSensorPosition() * (360.0 / 4096.0); // and vice versa here when reading from the
                                                                            // controller
+        return tiltMotor.getEncoder().getPosition();
     }
 
     // and for moving between the set ANGLE_POSITIONS, we have these 2 functions
