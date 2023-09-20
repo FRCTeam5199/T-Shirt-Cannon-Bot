@@ -7,8 +7,11 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxPIDController;
+import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.Constants;
 
 public class TiltHood {
@@ -21,6 +24,8 @@ public class TiltHood {
     // solenoids for shooting t-shirts
     public static DoubleSolenoid shooterSolenoid;
     public static Solenoid reserveSolenoid;
+    ShuffleboardTab tab = Shuffleboard.getTab("Tilt Hood");
+    NetworkTableEntry motorRotations = tab.add("Motor rotations", 0).getEntry();
 
     //compressor
     public static Compressor compressor = new Compressor(Constants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
@@ -56,6 +61,7 @@ public class TiltHood {
 //        oldTiltMotor.set(ControlMode.Position, angle * (4096.0 / 360.0)); // convert from angle to the
                                                                         // 4096-units-per-rotation
         tiltMotor.getEncoder().setPosition(angle);
+        motorRotations.setDouble(tiltMotor.getEncoder().getPosition());
     }
 
     public double getAnglePosition() {
