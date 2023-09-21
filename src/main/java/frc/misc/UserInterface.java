@@ -12,7 +12,6 @@ import frc.motorcontrollers.AbstractMotorController;
 import java.util.HashMap;
 import java.util.Map;
 
-import static frc.robot.Robot.robotSettings;
 
 public class UserInterface {
     private static NetworkTableInstance instance = NetworkTableInstance.getDefault();
@@ -39,12 +38,12 @@ public class UserInterface {
 
     //DRIVETRAIN
     public static final SimpleWidget
-            DRIVE_ROT_MULT = DRIVE_TAB.add("Rotation Factor", robotSettings.TURN_SCALE),
-            DRIVE_SCALE_MULT = DRIVE_TAB.add("Speed Factor", robotSettings.DRIVE_SCALE),
-            DRIVE_P = DRIVE_PID_LAYOUT.add("P", robotSettings.DRIVEBASE_PID.getP()),
-            DRIVE_I = DRIVE_PID_LAYOUT.add("I", robotSettings.DRIVEBASE_PID.getI()),
-            DRIVE_D = DRIVE_PID_LAYOUT.add("D", robotSettings.DRIVEBASE_PID.getD()),
-            DRIVE_F = DRIVE_PID_LAYOUT.add("F", robotSettings.DRIVEBASE_PID.getF()),
+//            DRIVE_ROT_MULT = DRIVE_TAB.add("Rotation Factor", robotSettings.TURN_SCALE),
+//            DRIVE_SCALE_MULT = DRIVE_TAB.add("Speed Factor", robotSettings.DRIVE_SCALE),
+//            DRIVE_P = DRIVE_PID_LAYOUT.add("P", robotSettings.DRIVEBASE_PID.getP()),
+//            DRIVE_I = DRIVE_PID_LAYOUT.add("I", robotSettings.DRIVEBASE_PID.getI()),
+//            DRIVE_D = DRIVE_PID_LAYOUT.add("D", robotSettings.DRIVEBASE_PID.getD()),
+//            DRIVE_F = DRIVE_PID_LAYOUT.add("F", robotSettings.DRIVEBASE_PID.getF()),
             DRIVE_CALIBRATE_PID = DRIVE_PID_LAYOUT.add("Tune PID", false).withWidget(BuiltInWidgets.kToggleSwitch),
             DRIVE_COAST = DRIVE_TAB.add("Coast", false).withWidget(BuiltInWidgets.kToggleSwitch),
             DRIVE_RUMBLE_NEAR_MAX = DRIVE_TAB.add("Rumble Near Max", false).withWidget(BuiltInWidgets.kToggleSwitch),
@@ -84,10 +83,10 @@ public class UserInterface {
 
     //MISC
     public static void initRobot() {
-        if (robotSettings.ENABLE_CAMERA) {
-            UsbCamera camera = CameraServer.startAutomaticCapture(0);
-            camera.setResolution(640, 480);
-            //UserInterface.SMART_DASHBOARD.add("CameraViewer", camera);
-        }
+//        if (robotSettings.ENABLE_CAMERA) {
+//            UsbCamera camera = CameraServer.startAutomaticCapture(0);
+//            camera.setResolution(640, 480);
+//            //UserInterface.SMART_DASHBOARD.add("CameraViewer", camera);
+//        }
     }
 }
