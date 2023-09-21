@@ -14,6 +14,9 @@ import frc.controllers.ControlPanel;
 import frc.controllers.XboxController;
 import frc.drive.Tonkerdrive;
 import frc.hood.TiltHood;
+import frc.misc.ISubsystem;
+
+import java.util.ArrayList;
 //import com.ctre.phoenix.*;
 //import com.ctre.phoenix.motorcontrol.*;
 //import com.ctre.phoenix.motorcontrol.can.*;
@@ -31,6 +34,7 @@ public class Robot extends TimedRobot {
     public static XboxController stick1;
     public static ControlPanel controlPanel;
     public static Tonkerdrive drive = new Tonkerdrive();
+    public static final ArrayList<ISubsystem> subsystems = new ArrayList<>();
 
     /**
      * This method is run when the robot is first started up and should be used for
@@ -228,6 +232,7 @@ public class Robot extends TimedRobot {
                 }
             }
         }
+        hood.logMotorRotations();
     }
 
     @Override

@@ -13,8 +13,9 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.Constants;
+import frc.misc.ISubsystem;
 
-public class TiltHood {
+public class TiltHood implements ISubsystem {
     // hood/tilt motor for angle
     //VictorSPX oldTiltMotor;
     CANSparkMax tiltMotor;
@@ -61,7 +62,6 @@ public class TiltHood {
 //        oldTiltMotor.set(ControlMode.Position, angle * (4096.0 / 360.0)); // convert from angle to the
                                                                         // 4096-units-per-rotation
         tiltMotor.getEncoder().setPosition(angle);
-        motorRotations.setDouble(tiltMotor.getEncoder().getPosition());
     }
 
     public double getAnglePosition() {
@@ -108,5 +108,69 @@ public class TiltHood {
     public void closeAll() {
         shooterSolenoid.set(Value.kReverse);
         reserveSolenoid.set(true); //inverted
+    }
+
+    public void logMotorRotations() {
+        motorRotations.setDouble(tiltMotor.getEncoder().getPosition());
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public SubsystemStatus getSubsystemStatus() {
+        return null;
+    }
+
+    @Override
+    public void updateTest() {
+
+    }
+
+    @Override
+    public void updateTeleop() {
+
+    }
+
+    @Override
+    public void updateAuton() {
+
+    }
+
+    @Override
+    public void updateGeneric() {
+
+    }
+
+    @Override
+    public void initTest() {
+
+    }
+
+    @Override
+    public void initTeleop() {
+
+    }
+
+    @Override
+    public void initAuton() {
+
+    }
+
+    @Override
+    public void initDisabled() {
+
+    }
+
+    @Override
+    public void initGeneric() {
+
+    }
+
+    @Override
+    public String getSubsystemName() {
+        return null;
     }
 }
