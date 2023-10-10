@@ -35,6 +35,13 @@ public class Tonkerdrive extends SubsystemBase {
         });
     }
 
+    public Command stopDrive() {
+        return this.runOnce(() -> {
+            left1.set(ControlMode.PercentOutput, 0);
+            right1.set(ControlMode.PercentOutput, 0);
+        });
+    }
+
     @Override
     public void periodic() {
         if (xboxController.getLeftY() > 0.01 || xboxController.getRightX() > 0.01) {
