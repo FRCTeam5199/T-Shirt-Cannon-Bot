@@ -63,29 +63,22 @@ public class TiltHood extends SubsystemBase {
     } else { return this.runOnce(() -> System.out.println("Can't move to it")); }
   }
 
-    public Command fireShot() {
+    public Command fireShot() { //2
       return this.runOnce(() -> {
         reserveSolenoid.set(true); //inverted
         shooterSolenoid.set(Value.kForward);
       });
   } 
 
-  public Command resetShooter() {
-      return this.runOnce(() -> shooterSolenoid.set(Value.kReverse));
-  }
-
-  public Command openReserve() {
+  public Command openReserve() { //1
       return this.runOnce(() -> {
         shooterSolenoid.set(Value.kReverse);
         reserveSolenoid.set(false); //inverted
       });
   }
 
-  public Command closeReserve() {
-      return this.runOnce(() -> reserveSolenoid.set(true)); //inverted
-  }
 
-  public Command closeAll() {
+  public Command closeAll() { //3
       return this.runOnce(() -> {
         shooterSolenoid.set(Value.kReverse);
         reserveSolenoid.set(true); //inverted
