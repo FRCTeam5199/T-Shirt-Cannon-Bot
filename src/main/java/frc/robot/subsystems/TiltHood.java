@@ -35,7 +35,7 @@ public class TiltHood extends SubsystemBase {
 
   public Command setToAngle(double angle) {
     //Coneversion factor previously was 4096 / 360, 4096 units per rotation
-      return this.runOnce(() -> tiltMotor.getEncoder().setPosition(angle));
+    return this.runOnce(() -> tiltMotor.getEncoder().setPosition(angle));
   }
 
   public double getAnglePosition() {
