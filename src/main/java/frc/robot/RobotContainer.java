@@ -4,13 +4,14 @@
 
 package frc.robot;
 
-import frc.robot.Constants;
 import frc.robot.drive.Tonkerdrive;
 import frc.robot.subsystems.TiltHood;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -42,12 +43,22 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    InstantCommand tiltHoodLow = new InstantCommand(() -> tiltHood.moveDefault(0));
-    InstantCommand tiltHoodMedium = new InstantCommand(() -> tiltHood.moveDefault(1));
-    InstantCommand tiltHoodHigh = new InstantCommand(() -> tiltHood.moveDefault(2));
+    InstantCommand tiltHoodLow = new InstantCommand(() -> tiltHood.setToAngle(Constants.ANGLE_POSITIONS[0]));
+    InstantCommand tiltHoodMedium = new InstantCommand(() -> tiltHood.setToAngle(Constants.ANGLE_POSITIONS[1]));
+    InstantCommand tiltHoodHigh = new InstantCommand(() -> tiltHood.setToAngle(Constants.ANGLE_POSITIONS[2]));
 
-    xboxController.x().onTrue(tiltHoodLow);
-    xboxController.a().onTrue(tiltHoodMedium);
-    xboxController.b().onTrue(tiltHoodHigh);
+    SequentialCommandGroup fireShot = new SequentialCommandGroup(
+      new InstantCommand(() -> tiltHood.openReserve()),
+      new WaitCommand(.5),
+      new InstantCommand(() -> tiltHood.fireShot()),
+      new WaitCommand(.5),
+      new InstantCommand(() -> tiltHood.closeAll())
+    );
+
+    xboxController.povLeft().onTrue(tiltHoodLow);
+    xboxController.povDown().onTrue(tiltHoodMedium);
+    xboxController.povRight().onTrue(tiltHoodHigh);
+
+    xboxController.a().onTrue(fireShot);
   }
 }

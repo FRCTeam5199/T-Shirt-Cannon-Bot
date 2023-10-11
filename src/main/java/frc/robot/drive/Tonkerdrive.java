@@ -3,7 +3,6 @@ package frc.robot.drive;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.Constants;
@@ -24,8 +23,6 @@ public class Tonkerdrive extends SubsystemBase {
         
         left2.follow(left1);
         right2.follow(right1);
-
-        right1.setInverted(Constants.IS_INVERTED);
     }
 
     public Command drive() {
@@ -46,6 +43,8 @@ public class Tonkerdrive extends SubsystemBase {
     public void periodic() {
         if (xboxController.getLeftY() > 0.01 || xboxController.getRightX() > 0.01) {
             drive();
+        } else {
+            stopDrive();
         }
     }
 }
