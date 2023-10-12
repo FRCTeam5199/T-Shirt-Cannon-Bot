@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.drive.Tonkerdrive;
 import frc.robot.subsystems.TiltHood;
+import frc.robot.LED.LED;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -25,6 +26,7 @@ public class RobotContainer {
   private final CommandXboxController xboxController = new CommandXboxController(Constants.XBOX_CONTROLLER_PORT);
   public static final TiltHood tiltHood = new TiltHood();
   public static final Tonkerdrive tonkerDrive = new Tonkerdrive();
+  public static final LED LED = new LED();
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -45,6 +47,14 @@ public class RobotContainer {
     InstantCommand tiltHoodMedium = new InstantCommand(() -> tiltHood.setToAngle(Constants.ANGLE_POSITIONS[1]));
     InstantCommand tiltHoodHigh = new InstantCommand(() -> tiltHood.setToAngle(Constants.ANGLE_POSITIONS[2]));
 
+    InstantCommand LEDTest = new InstantCommand(() -> LED.test());
+    InstantCommand LEDYellow = new InstantCommand(() -> LED.yellow());
+    InstantCommand LEDRainbow = new InstantCommand(() -> LED.Rainbow());
+    InstantCommand LEDRainbow2 = new InstantCommand(() -> LED.Rainbow2());
+    InstantCommand LEDRainbow3 = new InstantCommand(() -> LED.Rainbow3());
+    InstantCommand LEDCapoLEDMode = new InstantCommand(() -> LED.capoLEDMode());
+
+
     SequentialCommandGroup fireShot = new SequentialCommandGroup(
       new InstantCommand(() -> tiltHood.openReserve()),
       new WaitCommand(.5),
@@ -58,5 +68,12 @@ public class RobotContainer {
     xboxController.povRight().onTrue(tiltHoodHigh);
 
     xboxController.a().onTrue(fireShot);
+    
+    xboxController.povUp().onTrue(LEDTest);
+    xboxController.x().onTrue(LEDRainbow);
+    xboxController.y().onTrue(LEDRainbow2);
+    xboxController.b().onTrue(LEDRainbow3);
+    xboxController.leftBumper().onTrue(LEDYellow);
+    xboxController.rightBumper().onTrue(LEDCapoLEDMode);
   }
 }
