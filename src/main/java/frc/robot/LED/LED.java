@@ -53,7 +53,7 @@ public class LED extends SubsystemBase{
         });
     }
 
-    public void Rainbow() {
+    public Command Rainbow() {
         return this.runOnce(() -> {
             int[][] Rainer = new int[][]{{255, 0, 0}, {245, 167, 12}, {255, 248, 9}, {0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {128, 0, 255}, {255, 0, 140}};
             for (int Rainbow = 0; Rainbow < LEDBUFFER.getLength(); Rainbow++) {
@@ -67,24 +67,25 @@ public class LED extends SubsystemBase{
         });
     }
 
-    public void Rainbow2() {
+    public Command Rainbow2() {
         return this.runOnce(() -> {
-            for(var i = 0; i < LEDBUFFER.getLength(); i++) {
+            for (var i = 0; i < LEDBUFFER.getLength(); i++) {
                 final var hue = (firstPixelHue + (i * 180 / LEDBUFFER.getLength())) % 180;
                 LEDBUFFER.setHSV(i, hue, 255, 128);
             }
             firstPixelHue += 3;
             firstPixelHue %= 180;
+        });
     }
 
-    public void Rainbow3() {
+    public Command Rainbow3() {
         return this.runOnce(() -> {
             Rainbow2();
             LEDRGB.setData(LEDBUFFER);
         });
     }
 
-    public void DOLPHIN() {
+    public Command DOLPHIN() {
         return this.runOnce(() -> {
             for (int blue = 0; blue < LEDBUFFER.getLength(); blue++) {
                 LEDBUFFER.setRGB(blue, 25, 19, 210);
@@ -98,7 +99,7 @@ public class LED extends SubsystemBase{
     }
 
 
-    public void capoLEDMode() {
+    public Command capoLEDMode() {
         return this.runOnce(() -> {
             //Each second, alternates between black and yellow & yellow and black LEDs
             if (timer.get() >= 1) {
