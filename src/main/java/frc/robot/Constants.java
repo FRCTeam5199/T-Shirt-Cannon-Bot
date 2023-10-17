@@ -14,7 +14,7 @@ public class Constants {
     public static final int LED_PORT = 0;
     public static final int LED_LENGTH = 89;
     public static final int TILT_MOTOR_ID = 7;
-    public static final int SHOOTER_SOLENOID_ID_1 = 3;
+    public static final int SHOOTER_SOLENOID_ID_1 = 8;
     public static final int SHOOTER_SOLENOID_ID_2 = 1;
     public static final int RESERVE_SOLENOID_ID = 2;
     
