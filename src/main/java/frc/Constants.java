@@ -29,7 +29,7 @@ public class Constants {
     public static final boolean SECOND_TRY = true;
 
     //Set these values later
-    public static final double TILT_HOOD_P = 0;
+    public static final double TILT_HOOD_P = 0.01;
     public static final double TILT_HOOD_I = 0;
     public static final double TILT_HOOD_D = 0;
 }
