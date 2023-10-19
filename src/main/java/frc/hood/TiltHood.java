@@ -7,6 +7,8 @@ import com.ctre.phoenix.motorcontrol.can.*;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxPIDController;
+
+import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
@@ -26,7 +28,7 @@ public class TiltHood implements ISubsystem {
     public static DoubleSolenoid shooterSolenoid;
     public static Solenoid reserveSolenoid;
     ShuffleboardTab tab = Shuffleboard.getTab("Tilt Hood");
-    NetworkTableEntry motorRotations = tab.add("Motor rotations", 0).getEntry();
+    GenericEntry motorRotations = tab.add("Motor rotations", 0).getEntry();
 
     //compressor
     public static Compressor compressor = new Compressor(Constants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
