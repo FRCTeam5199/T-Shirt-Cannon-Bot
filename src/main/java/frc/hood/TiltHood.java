@@ -16,12 +16,12 @@ import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import frc.Constants;
 import frc.misc.ISubsystem;
+import frc.LED.LEDManager;
 
 public class TiltHood implements ISubsystem {
     // hood/tilt motor for angle
     //VictorSPX oldTiltMotor;
-    CANSparkMax tiltMotor;
-    SparkMaxPIDController tiltMotorController;
+ 
     int angleIndex = 2; //default to 60 degrees
     
     // solenoids for shooting t-shirts
@@ -29,6 +29,8 @@ public class TiltHood implements ISubsystem {
     public static Solenoid reserveSolenoid;
     ShuffleboardTab tab = Shuffleboard.getTab("Tilt Hood");
     GenericEntry motorRotations = tab.add("Motor rotations", 0).getEntry();
+    DigitalOutput shoot = new DigitalOutput(9);
+    LEDManager led = new LEDManager();
 
     //compressor
     public static Compressor compressor = new Compressor(Constants.COMPRESSOR_ID, PneumaticsModuleType.REVPH);
@@ -39,11 +41,6 @@ public class TiltHood implements ISubsystem {
         // initialize tilt motor & shooters; link them to device IDs
 //        oldTiltMotor = new VictorSPX(tiltMotorID);
 
-        tiltMotor = new CANSparkMax(tiltMotorID, CANSparkMaxLowLevel.MotorType.kBrushed);
-        tiltMotorController = tiltMotor.getPIDController();
-        tiltMotorController.setP(Constants.TILT_HOOD_P);
-        tiltMotorController.setI(Constants.TILT_HOOD_I);
-        tiltMotorController.setD(Constants.TILT_HOOD_D);
 
         this.setToAngle(Constants.ANGLE_POSITIONS[angleIndex]);
 
@@ -63,13 +60,11 @@ public class TiltHood implements ISubsystem {
     public void setToAngle(double angle) {
 //        oldTiltMotor.set(ControlMode.Position, angle * (4096.0 / 360.0)); // convert from angle to the
                                                                         // 4096-units-per-rotation
-        tiltMotor.getEncoder().setPosition(angle);
     }
 
     public double getAnglePosition() {
         //return oldTiltMotor.getSelectedSensorPosition() * (360.0 / 4096.0); // and vice versa here when reading from the
-                                                                           // controller
-        return tiltMotor.getEncoder().getPosition();
+       return 0;                                                                    // controller
     }
 
     // and for moving between the set ANGLE_POSITIONS, we have these 2 functions
@@ -89,8 +84,7 @@ public class TiltHood implements ISubsystem {
     // functions from previous shooter class
     public void fireShot() {
         System.out.println("firing");
-        reserveSolenoid.set(true); //inverted
-        shooterSolenoid.set(Value.kForward);
+        shoot.set(true);
     } 
 
     public void resetShooter() {
@@ -108,12 +102,12 @@ public class TiltHood implements ISubsystem {
     }
 
     public void closeAll() {
+        shoot.set(false);
         shooterSolenoid.set(Value.kReverse);
         reserveSolenoid.set(true); //inverted
     }
 
     public void logMotorRotations() {
-        motorRotations.setDouble(tiltMotor.getEncoder().getPosition());
     }
 
     @Override

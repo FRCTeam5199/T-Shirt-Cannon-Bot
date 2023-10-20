@@ -222,7 +222,9 @@ public class Robot extends TimedRobot {
                 }
                 else {
                     hood.closeAll();
-                    ledManager.Rainbow3();
+                //More color options
+                    ledManager.yellow();
+                    //ledManager.Rainbow3();
                 }
 
                 //Disable compressor if PSI above 120

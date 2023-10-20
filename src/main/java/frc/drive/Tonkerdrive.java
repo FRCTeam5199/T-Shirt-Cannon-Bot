@@ -6,6 +6,7 @@ import frc.controllers.XboxController;
 import frc.robot.Robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Tonkerdrive {
@@ -27,6 +28,7 @@ public class Tonkerdrive {
         right1 = new VictorSPX(Constants.RIGHT_1_DEVICE_ID);
         right2 = new VictorSPX(Constants.RIGHT_2_DEVICE_ID);
         tilt = new VictorSPX(Constants.TILT_ID);
+        tilt.neutralOutput();
         
         left2.follow(left1);
         right2.follow(right1);
@@ -42,6 +44,8 @@ public class Tonkerdrive {
         //Drive
         left1.set(ControlMode.PercentOutput, ((joystick.getLYAxis() + (joystick.getRXAxis() * Constants.TURN_FACTOR)) * Constants.VOLTAGE_MULT) * Constants.MAX_SPEED_PERCENT);
         right1.set(ControlMode.PercentOutput, ((-joystick.getLYAxis() + (joystick.getRXAxis() * Constants.TURN_FACTOR)) * Constants.VOLTAGE_MULT) * Constants.MAX_SPEED_PERCENT);
+
+        tilt.setNeutralMode(NeutralMode.Brake);
 
         /*
         if(joystick.getButton(1)) {
@@ -60,14 +64,12 @@ public class Tonkerdrive {
         //System.out.println("d-pad-up is " + joystick.getDPadUp());
         if(joystick.getDPadUp()) {
             tilt.setInverted(false);
-            tilt.set(ControlMode.PercentOutput, 0.35);
+            tilt.set(ControlMode.PercentOutput, 0.3);
         }
         else if(joystick.getDPadDown()) {
             tilt.setInverted(true);
-            tilt.set(ControlMode.PercentOutput, 0.35);
+            tilt.set(ControlMode.PercentOutput, 0.3);
         }
-        else {
-            tilt.set(ControlMode.PercentOutput, 0);
-        }
+        
     }
 }
