@@ -31,7 +31,6 @@ import java.util.ArrayList;
  * project.
  */
 public class Robot extends TimedRobot {
-    public static XboxController stick1;
     public static ControlPanel controlPanel;
     public static Tonkerdrive drive = new Tonkerdrive();
     public static final ArrayList<ISubsystem> subsystems = new ArrayList<>();
@@ -103,7 +102,6 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         System.out.println("initializing");
         xboxController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-        stick1 = new XboxController(Constants.XBOX_CONTROLLER_PORT);
         drive.driveInit();
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         controlPanel = new ControlPanel(Constants.CONTROL_PANEL_PORT);
@@ -128,7 +126,6 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         System.out.println("initalizing");
-        stick1 = new XboxController(Constants.XBOX_CONTROLLER_PORT);
         hood.resetShooter();
         ledManager.yellow();
         System.out.println("done initalizing");
@@ -148,7 +145,7 @@ public class Robot extends TimedRobot {
             drive.Teleop();
             
             /*TODO
-            if(stick1.getButton(6)) {
+            if(xboxController.getButton(6)) {
                 safetyMode = !safetyMode;
                 System.out.println("safety is " + safetyMode);
                 Timer.delay(1);
@@ -156,7 +153,7 @@ public class Robot extends TimedRobot {
             */
             
             //Toggle compressor with Left-bumper
-            if(xboxController.getButton(5) || stick1.getButton(5)) {
+            if(xboxController.getButton(5)) {
                 System.out.println("toggling compressor");
                 if(compressorEnabled == true) {
                     TiltHood.compressor.enableDigital();
@@ -198,12 +195,12 @@ public class Robot extends TimedRobot {
                 }
                 */
                 //Pre-fire strobe
-                else if(xboxController.getButton(3) || stick1.getButton(3) || controlPanel.safetySwitch()) {
+                else if(xboxController.getButton(3) || controlPanel.safetySwitch()) {
                     prefiringStrobe = !prefiringStrobe;
                     Timer.delay(0.5);
                 }
                 //Pre-fire
-                else if(xboxController.getButton(2) || stick1.getButton(2) || controlPanel.safetySwitch()) {
+                else if(xboxController.getButton(2) || controlPanel.safetySwitch()) {
                     isPrefiring = !isPrefiring;
                     Timer.delay(0.5);
                 }
