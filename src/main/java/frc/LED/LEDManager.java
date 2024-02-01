@@ -12,8 +12,10 @@ public class LEDManager {
     XboxController xboxController = new XboxController(Constants.XBOX_CONTROLLER_PORT);
     ControlPanel panelofcontrol = new ControlPanel(Constants.PANEL_OF_CONTROL_PORT);
     ControlPanel controlPanel;
-    static AddressableLED LEDRGB = new AddressableLED(Constants.LED_PORT);
+    static AddressableLED LEDRGB = new AddressableLED(Constants.CANNON_LED_PORT);
+    static AddressableLED FRONTLED = new AddressableLED(Constants.FRONT_LED_PORT);
     static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(Constants.LED_LENGTH);
+    static AddressableLEDBuffer FRONTLEDBUFFER = new AddressableLEDBuffer(94);
     Timer timer = new Timer();
     boolean swap = false;
     int firstPixelHue = 0;
@@ -41,6 +43,13 @@ public class LEDManager {
         LEDRGB.setLength(LEDBUFFER.getLength());
         LEDRGB.setData(LEDBUFFER);
         LEDRGB.start();
+
+        for(var i = 0; i < FRONTLEDBUFFER.getLength(); i++) {
+            FRONTLEDBUFFER.setRGB(i, 255, 255, 0);
+        }
+        FRONTLED.setLength(FRONTLEDBUFFER.getLength());
+        FRONTLED.setData(FRONTLEDBUFFER);
+        FRONTLED.start();
     }
 
     public void Rainbow() {
