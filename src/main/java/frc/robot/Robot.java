@@ -108,7 +108,6 @@ public class Robot extends TimedRobot {
         // simpleWidget = Shuffleboard.getTab("Tab").add("Title", "value");
         controlPanel = new ControlPanel(Constants.CONTROL_PANEL_PORT);
 
-        hood = new TiltHood(Constants.TILT_MOTOR_ID, Constants.SHOOTER_SOLENOID_ID_1, Constants.SHOOTER_SOLENOID_ID_2, Constants.RESERVE_SOLENOID_ID);
         pressureSensor = new AnalogInput(0);
     }
 
@@ -129,7 +128,6 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         System.out.println("initalizing");
         stick1 = new XboxController(Constants.XBOX_CONTROLLER_PORT);
-        hood.resetShooter();
         ledManager.yellow();
         System.out.println("done initalizing");
     }
@@ -221,7 +219,6 @@ public class Robot extends TimedRobot {
                     System.out.println("pre-firing");
                 }
                 else {
-                    hood.closeAll();
                     ledManager.Rainbow3();
                 }
 
@@ -232,7 +229,6 @@ public class Robot extends TimedRobot {
                 }
             }
         }
-        hood.logMotorRotations();
     }
 
     @Override

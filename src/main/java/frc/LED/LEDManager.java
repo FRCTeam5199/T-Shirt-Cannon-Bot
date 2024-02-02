@@ -14,6 +14,8 @@ public class LEDManager {
     ControlPanel controlPanel;
     static AddressableLED LEDRGB = new AddressableLED(Constants.LED_PORT);
     static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(Constants.LED_LENGTH);
+    static AddressableLEDBuffer FRONTLEDBUFFER = new AddressableLEDBuffer(94);
+
     Timer timer = new Timer();
     boolean swap = false;
     int firstPixelHue = 0;
@@ -41,6 +43,8 @@ public class LEDManager {
         LEDRGB.setLength(LEDBUFFER.getLength());
         LEDRGB.setData(LEDBUFFER);
         LEDRGB.start();
+
+  
     }
 
     public void Rainbow() {

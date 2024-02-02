@@ -282,8 +282,6 @@ public abstract class AbstractMotorController {
 
         public AbstractMotorController createMotorOfType(String canbus, int ID) {
             switch (this) {
-                case CAN_SPARK_MAX:
-                    return new SparkMotorController(ID);
                 case SERVO:
                 default:
                     throw new IllegalArgumentException("I cannot make a motor of type " + name());
