@@ -76,7 +76,7 @@ public class Robot extends TimedRobot {
     XboxController xboxController;
 
     // hood
-    TiltHood hood;
+    TiltHood hood = new TiltHood();
 
     // LED Manager
     LEDManager ledManager = new LEDManager();
@@ -228,6 +228,14 @@ public class Robot extends TimedRobot {
                     compressorEnabled = false;
                 }
             }
+        }
+
+        if (xboxController.getDPadUp()) {
+            hood.setMotorSpeed(0.2);
+        } else if (xboxController.getDPadUp()) {
+            hood.setMotorSpeed(-0.2);
+        } else {
+            hood.setMotorSpeed(0);
         }
     }
 

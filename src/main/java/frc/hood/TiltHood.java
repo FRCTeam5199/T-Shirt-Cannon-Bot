@@ -1,5 +1,7 @@
 package frc.hood;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.SparkMaxPIDController;
@@ -19,12 +21,11 @@ import frc.misc.ISubsystem;
 
 public class TiltHood implements ISubsystem {
     // hood/tilt motor for angle
-    //VictorSPX old;
+    VictorSPX motor;
     int angleIndex = 2; //default to 60 degrees
     
     // solenoids for shooting t-shirts
-    public static DoubleSolenoid shooterSolenoid;
-    public static Solenoid reserveSolenoid;
+    public static Solenoid reserveSolenoid = new Solenoid(PneumaticsModuleType.REVPH, Constants.RESERVE_SOLENOID_ID);
     ShuffleboardTab tab = Shuffleboard.getTab("Tilt Hood");
     public static DigitalOutput outputs = new DigitalOutput(9);
     //compressor
@@ -35,28 +36,30 @@ public class TiltHood implements ISubsystem {
    
 
     // i don't know if victor controllers work like this, but it's worth a shot
- 
+    public TiltHood() {
+        motor = new VictorSPX(Constants.TILT_MOTOR_ID);
+    }
+    
 
 
-
+    public void setMotorSpeed(double speed) {
+        motor.set(ControlMode.PercentOutput, speed);
+    }
     
     // functions from previous shooter class
     public void fireShot() {
         System.out.println("firing");
         outputs.set(true);
         reserveSolenoid.set(true); //inverted
-        shooterSolenoid.set(Value.kForward);
     } 
 
     public void resetShooter() {
-        //System.out.println("reset shooter");
+        //System.out.println("rest shooter");
         outputs.set(false);
-        shooterSolenoid.set(Value.kReverse);
     }
 
     public void openReserve() {
         outputs.set(true);
-        shooterSolenoid.set(Value.kReverse);
         reserveSolenoid.set(false); //inverted
     }
 
@@ -67,7 +70,6 @@ public class TiltHood implements ISubsystem {
 
     public void closeAll() {
         outputs.set(false);
-        shooterSolenoid.set(Value.kReverse);
         reserveSolenoid.set(true); //inverted
     }
 
