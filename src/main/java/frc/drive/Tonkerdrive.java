@@ -6,6 +6,7 @@ import frc.controllers.XboxController;
 import frc.robot.Robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class Tonkerdrive {
@@ -32,6 +33,8 @@ public class Tonkerdrive {
         right2.follow(right1);
 
         right1.setInverted(Constants.IS_INVERTED);
+        right1.setNeutralMode(NeutralMode.Brake);
+        left1.setNeutralMode(NeutralMode.Brake);
 
     }
     

@@ -50,7 +50,7 @@ public class TiltHood implements ISubsystem {
     public void fireShot() {
         System.out.println("firing");
         outputs.set(true);
-        reserveSolenoid.set(true); //inverted
+        //reserveSolenoid.set(); //inverted
     } 
 
     public void resetShooter() {
@@ -60,12 +60,12 @@ public class TiltHood implements ISubsystem {
 
     public void openReserve() {
         outputs.set(true);
-        reserveSolenoid.set(false); //inverted
+        reserveSolenoid.set(true); //inverted
     }
 
     public void closeReserve() {
         outputs.set(false);
-        reserveSolenoid.set(true); //inverted
+        reserveSolenoid.set(false); //inverted
     }
 
     public void closeAll() {
