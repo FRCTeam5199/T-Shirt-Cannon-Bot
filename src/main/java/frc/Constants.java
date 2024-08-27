@@ -14,9 +14,9 @@ public class Constants {
     public static final int XBOX_CONTROLLER_PORT = 0;
     public static final int PANEL_OF_CONTROL_PORT = 1;
     public static final int CONTROL_PANEL_PORT = 2;
-    public static final int LED_PORT = 0;
+    public static final int LED_PORT = 9;
     public static final int FRONT_LED_PORT = 1;
-    public static final int LED_LENGTH = 89;
+    public static final int LED_LENGTH = 60;
     public static final boolean SHOOTER_ENABLED = true;
     public static final int TILT_MOTOR_ID = 7;
     public static final int SHOOTER_SOLENOID_ID_1 = 3;

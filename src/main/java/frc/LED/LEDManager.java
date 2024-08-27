@@ -14,7 +14,7 @@ public class LEDManager {
     ControlPanel controlPanel;
     static AddressableLED LEDRGB = new AddressableLED(Constants.LED_PORT);
     static AddressableLEDBuffer LEDBUFFER = new AddressableLEDBuffer(Constants.LED_LENGTH);
-    static AddressableLEDBuffer FRONTLEDBUFFER = new AddressableLEDBuffer(94);
+    //static AddressableLEDBuffer FRONTLEDBUFFER = new AddressableLEDBuffer(94);
 
     Timer timer = new Timer();
     boolean swap = false;

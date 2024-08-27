@@ -130,6 +130,7 @@ public class Robot extends TimedRobot {
         stick1 = new XboxController(Constants.XBOX_CONTROLLER_PORT);
         ledManager.yellow();
         System.out.println("done initalizing");
+        hood.closeAll();
     }
 
     //Tele-op periodic
@@ -183,6 +184,8 @@ public class Robot extends TimedRobot {
                     prefiringStrobe = false;
                     hood.closeReserve();
                     hood.fireShot();
+                    Timer.delay(.5);
+                    hood.closeAll();
                 }
                 /*
                 } else {
@@ -231,9 +234,9 @@ public class Robot extends TimedRobot {
         }
 
         if (xboxController.getDPadUp()) {
-            hood.setMotorSpeed(0.2);
+            hood.setMotorSpeed(0.3);
         } else if (xboxController.getDPadUp()) {
-            hood.setMotorSpeed(-0.2);
+            hood.setMotorSpeed(-0.3);
         } else {
             hood.setMotorSpeed(0);
         }

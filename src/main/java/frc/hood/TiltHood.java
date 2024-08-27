@@ -49,7 +49,7 @@ public class TiltHood implements ISubsystem {
     // functions from previous shooter class
     public void fireShot() {
         System.out.println("firing");
-        outputs.set(true);
+        outputs.set(false);
         //reserveSolenoid.set(); //inverted
     } 
 
@@ -69,14 +69,14 @@ public class TiltHood implements ISubsystem {
     }
 
     public void closeAll() {
-        outputs.set(false);
-        reserveSolenoid.set(true); //inverted
+        outputs.set(true);
+        reserveSolenoid.set(false); //inverted
     }
 
 
     @Override
     public void init() {
-
+        outputs.set(true);
     }
 
     @Override
@@ -111,7 +111,7 @@ public class TiltHood implements ISubsystem {
 
     @Override
     public void initTeleop() {
-
+        outputs.set(true);
     }
 
     @Override
